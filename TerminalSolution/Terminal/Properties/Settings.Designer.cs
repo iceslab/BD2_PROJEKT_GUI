@@ -34,5 +34,53 @@ namespace Terminal.Properties {
                 return ((string)(this["guestConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;\n            Initial Catalog=TerminalMSSQL;\n         " +
+            "   User Id=VALIDATE_CREDENTIALS_LOGIN;\n            Password=validate;\n          " +
+            "  Integrated Security=True")]
+        public string ValidateCredentials {
+            get {
+                return ((string)(this["ValidateCredentials"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;\n            Initial Catalog=TerminalMSSQL;\n         " +
+            "   User Id=AGENT_LOGIN;\n            Password=agent;\n            Integrated Secur" +
+            "ity=True")]
+        public string Agent {
+            get {
+                return ((string)(this["Agent"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;\n            Initial Catalog=TerminalMSSQL;\n         " +
+            "   User Id=EMPLOYEE_LOGIN;\n            Password=employee;\n            Integrated" +
+            " Security=True")]
+        public string Employee {
+            get {
+                return ((string)(this["Employee"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;\n            Initial Catalog=TerminalMSSQL;\n         " +
+            "   User Id=MANAGER_LOGIN;\n            Password=manager;\n            Integrated S" +
+            "ecurity=True")]
+        public string Manager {
+            get {
+                return ((string)(this["Manager"]));
+            }
+        }
     }
 }

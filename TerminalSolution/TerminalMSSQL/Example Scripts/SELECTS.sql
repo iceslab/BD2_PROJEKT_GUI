@@ -1,12 +1,12 @@
 ﻿SELECT * FROM [TerminalMSSQL].[dbo].[CONTACT_DATA];
---SELECT * FROM [TerminalMSSQL].[dbo].[AGENTS];
---SELECT * FROM [TerminalMSSQL].[dbo].[CLIENTS];
---SELECT * FROM [TerminalMSSQL].[dbo].[ACCOUNTS];
---SELECT * FROM [TerminalMSSQL].[dbo].[AIRCRAFT_MODELS];
---SELECT * FROM [TerminalMSSQL].[dbo].[AIRCRAFTS];
---SELECT * FROM [TerminalMSSQL].[dbo].[MAINTENANCE];
---SELECT * FROM [TerminalMSSQL].[dbo].[LOGS];
---SELECT * FROM [TerminalMSSQL].[dbo].[RESERVATION_VIEW];
+SELECT * FROM [TerminalMSSQL].[dbo].[AGENTS];
+SELECT * FROM [TerminalMSSQL].[dbo].[CLIENTS];
+SELECT * FROM [TerminalMSSQL].[dbo].[ACCOUNTS];
+SELECT * FROM [TerminalMSSQL].[dbo].[AIRCRAFT_MODELS];
+SELECT * FROM [TerminalMSSQL].[dbo].[AIRCRAFTS];
+SELECT * FROM [TerminalMSSQL].[dbo].[MAINTENANCE];
+SELECT * FROM [TerminalMSSQL].[dbo].[LOGS];
+SELECT * FROM [TerminalMSSQL].[dbo].[RESERVATION_VIEW];
 
 INSERT INTO [dbo].[CONTACT_DATA]
 VALUES 

@@ -10,5 +10,69 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=(LocalDB)\v11.0;Initial Catalog=TerminalMSSQL;User Id=GUEST_DBUSER;Password=eD$nWvgBWeqt|phpa`?xsc6nmsFT7_&amp;#$!~&lt;pyxdhs9LhAlm;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="ValidateCredentials" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=VALIDATE_CREDENTIALS_LOGIN;
+            Password=validate;
+            Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=VALIDATE_CREDENTIALS_LOGIN;
+            Password=validate;
+            Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="Agent" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=AGENT_LOGIN;
+            Password=agent;
+            Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=AGENT_LOGIN;
+            Password=agent;
+            Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="Employee" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=EMPLOYEE_LOGIN;
+            Password=employee;
+            Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=EMPLOYEE_LOGIN;
+            Password=employee;
+            Integrated Security=True</Value>
+    </Setting>
+    <Setting Name="Manager" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=MANAGER_LOGIN;
+            Password=manager;
+            Integrated Security=True&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=(LocalDB)\v11.0;
+            Initial Catalog=TerminalMSSQL;
+            User Id=MANAGER_LOGIN;
+            Password=manager;
+            Integrated Security=True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
