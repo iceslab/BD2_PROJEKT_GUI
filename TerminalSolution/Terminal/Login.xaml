@@ -6,7 +6,7 @@
         <Image Source ="Graphics/paperplane.png" HorizontalAlignment="Center" Margin ="0,50,0,0" Height="79" VerticalAlignment="Top" Width="138"/>
         <TextBox x:Name="loginTBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Width="150" Margin="0,5,0,5"/>
         <PasswordBox x:Name="passwordTBox" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Margin="0,5,0,5"/>
-        <Button Content="Zaloguj się" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Width="100" Click="LogInButtonClicked" Margin="96,5" IsDefault="True"/>
-        <Button Content="Zarejestruj się" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Width="100" Click="SingUpButtonClicked" Margin="96,5"/>
+        <Button Content="Zaloguj się" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Width="100" Click="LogInButtonClicked" Margin="0,5,0,0" IsDefault="True"/>
+        <Button Content="Zarejestruj się" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Width="100" Click="SingUpButtonClicked" Margin="0,5,0,0"/>
     </StackPanel>
 </Window>
