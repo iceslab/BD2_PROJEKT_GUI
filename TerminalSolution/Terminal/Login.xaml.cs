@@ -36,7 +36,15 @@ namespace Terminal
                 {
                     MessageBox.Show(exc.Message);
                 }
+                ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
+                    new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
+                ManagerDataSet.ACCOUNTSDataTable y = new ManagerDataSet.ACCOUNTSDataTable();
+                x.Fill(y);
 
+                foreach (ManagerDataSet.ACCOUNTSRow z in y.Rows)
+                {
+                    Console.WriteLine(z.ACCOUNT_ID + " "  + z.LOGIN);
+                }
                 //TerminalMSSQLDataSet dataSet = new TerminalMSSQLDataSet();
                 //TerminalMSSQLDataSetTableAdapters.ACCOUNTSTableAdapter accountTableAdapter =
                 //    new TerminalMSSQLDataSetTableAdapters.ACCOUNTSTableAdapter();
@@ -47,6 +55,7 @@ namespace Terminal
 
                 string query1 = "dbo.VALIDATE_CREDENTIALS_FUNCTION";
                 SqlCommand command = new SqlCommand(query1, conn);
+                
 
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -58,6 +67,10 @@ namespace Terminal
                 //Console.WriteLine(CalculateMD5Hash("hash01"));
                 var login = loginTBox.Text;
                 var hash = CalculateMD5Hash(passwordTBox.Password);
+
+                ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter queriesTA = 
+                    new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
+                queriesTA.VALIDATE_CREDENTIALS_FUNCTION(login, hash);
                 command.Parameters.Add("@login", SqlDbType.VarChar);
                 command.Parameters.Add("@hash", SqlDbType.VarChar);
                 command.Parameters.Add(returnParam);
