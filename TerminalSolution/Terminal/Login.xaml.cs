@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlServerCe;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
 
 namespace Terminal
 {
@@ -25,20 +16,15 @@ namespace Terminal
     public partial class Login : Window
     {
 
-        String connectionString;
+        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.ValidateCredentials"].ConnectionString;
         public Login()
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.ValidateCredentials"].ConnectionString;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var wyndows = new List<Window>();
-            wyndows.Add(new StaffWindow());
-            wyndows.Add(new AgentWindow());
-            wyndows.Add(new ManagerWindow());
-
+            SqlInt32 permissions;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -66,7 +52,7 @@ namespace Terminal
 
                 var returnParam = new SqlParameter
                 {
-                    ParameterName = "@return",
+                    ParameterName = "@permission",
                     Direction = ParameterDirection.ReturnValue
                 };
                 //Console.WriteLine(CalculateMD5Hash("hash01"));
@@ -80,7 +66,7 @@ namespace Terminal
                 command.Parameters["@hash"].Value = hash;
 
                 command.ExecuteNonQuery();
-                var ret = returnParam.SqlValue;
+                permissions = (SqlInt32)returnParam.SqlValue;
                 //var reader = command.ExecuteReader();
                 //while (reader.Read())
                 //{
@@ -90,11 +76,34 @@ namespace Terminal
                 //MessageBox.Show(result.ToString());
             }
 
-            foreach (Window win in wyndows)
+
+            if (!permissions.IsNull)
             {
-                win.Show();
+                Window window;
+                switch (permissions.Value)
+                {
+                    default:
+                        break;
+                    case 1:
+                        window = new ManagerWindow();
+                        window.Show();
+                        break;
+                    case 2:
+                        window = new StaffWindow();
+                        window.Show();
+                        break;
+                    case 3:
+                        window = new AgentWindow();
+                        window.Show();
+                        break;
+                }
+                Close();
             }
-            this.Close();
+            else
+            {
+                MessageBox.Show(this, "Zły login lub hasło", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         public string CalculateMD5Hash(string input)
