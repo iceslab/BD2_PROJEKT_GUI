@@ -79,6 +79,10 @@
       <DependentUpon>AgentDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="EmployeeDataSet.cs">
+      <DependentUpon>EmployeeDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EmployeeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

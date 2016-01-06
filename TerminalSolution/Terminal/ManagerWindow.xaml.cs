@@ -56,7 +56,16 @@ namespace Terminal
             {
                 MessageBox.Show(exc.Message);
             }
+        }
 
+        private void FillOtherDataGrid()
+        {
+            ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter adapter =
+                new ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter();
+            var table = adapter.GetData();
+
+            otherDataGrid.ItemsSource = table.DefaultView;
+            //adapter.Update(table);
         }
     }
 }

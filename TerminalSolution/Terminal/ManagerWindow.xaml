@@ -32,7 +32,9 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Statystyki">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid AutoGenerateColumns="True" Name="otherDataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="507" Height="324"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
