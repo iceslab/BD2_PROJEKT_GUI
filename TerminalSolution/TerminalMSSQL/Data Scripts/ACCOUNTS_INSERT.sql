@@ -10,7 +10,7 @@ VALUES
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.konieczna','hash07', 2, 0, null),
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.czarnecki','hash08', 2, 0, null),
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.wieczorek','hash09', 2, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.wisniewski','hash10', 1, 0, null),
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.wisniewski','162de50854fb25ea3fd8640282cb67b4', 1, 0, null),
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.nowakowski','hash11', 1, 0, null),
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.czerwinski','hash12', 1, 1, null),
 (NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.trocki','hash13', 2, 1, null),

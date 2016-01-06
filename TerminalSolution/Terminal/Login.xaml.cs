@@ -24,76 +24,18 @@ namespace Terminal
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SqlInt32 permissions;
+            ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter tableAdapter =
+                new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
+            var login = loginTBox.Text;
+            var hash = CalculateMD5Hash(passwordTBox.Password);
+            int? permissions = tableAdapter.VALIDATE_CREDENTIALS_FUNCTION(login, hash);;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                }
-                catch (SqlException exc)
-                {
-                    MessageBox.Show(exc.Message);
-                }
-                ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
-                    new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
-                ManagerDataSet.ACCOUNTSDataTable y = new ManagerDataSet.ACCOUNTSDataTable();
-                x.Fill(y);
+            Console.WriteLine(CalculateMD5Hash("hash10"));
 
-                foreach (ManagerDataSet.ACCOUNTSRow z in y.Rows)
-                {
-                    Console.WriteLine(z.ACCOUNT_ID + " "  + z.LOGIN);
-                }
-                //TerminalMSSQLDataSet dataSet = new TerminalMSSQLDataSet();
-                //TerminalMSSQLDataSetTableAdapters.ACCOUNTSTableAdapter accountTableAdapter =
-                //    new TerminalMSSQLDataSetTableAdapters.ACCOUNTSTableAdapter();
-                //accountTableAdapter.Fill(dataSet.ACCOUNTS);
-
-                //string query = "SELECT * FROM INFORMATION_SCHEMA.TABLES";
-                //string query2 = "SELECT * FROM dbo.CONTACT_DATA";
-
-                string query1 = "dbo.VALIDATE_CREDENTIALS_FUNCTION";
-                SqlCommand command = new SqlCommand(query1, conn);
-                
-
-                command.CommandType = CommandType.StoredProcedure;
-
-                var returnParam = new SqlParameter
-                {
-                    ParameterName = "@permission",
-                    Direction = ParameterDirection.ReturnValue
-                };
-                //Console.WriteLine(CalculateMD5Hash("hash01"));
-                var login = loginTBox.Text;
-                var hash = CalculateMD5Hash(passwordTBox.Password);
-
-                ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter queriesTA = 
-                    new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
-                queriesTA.VALIDATE_CREDENTIALS_FUNCTION(login, hash);
-                command.Parameters.Add("@login", SqlDbType.VarChar);
-                command.Parameters.Add("@hash", SqlDbType.VarChar);
-                command.Parameters.Add(returnParam);
-
-                command.Parameters["@login"].Value = login;
-                command.Parameters["@hash"].Value = hash;
-
-                command.ExecuteNonQuery();
-                permissions = (SqlInt32)returnParam.SqlValue;
-                //var reader = command.ExecuteReader();
-                //while (reader.Read())
-                //{
-                //    Console.WriteLine("Values:  {0}, {1}, {2}, {3}",
-                //        reader[0], reader[1], reader[2], reader[3]);
-                //}
-                //MessageBox.Show(result.ToString());
-            }
-
-
-            if (!permissions.IsNull)
+            if (permissions != null)
             {
                 Window window;
-                switch (permissions.Value)
+                switch (permissions)
                 {
                     default:
                         break;
