@@ -22,7 +22,7 @@ namespace Terminal
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LogInButtonClicked(object sender, RoutedEventArgs e)
         {
             ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter tableAdapter =
                 new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
@@ -75,6 +75,12 @@ namespace Terminal
                 sb.Append(hash[i].ToString("x2"));
             }
             return sb.ToString();
+        }
+
+        private void SingUpButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Window window = new NewAccountWindow();
+            window.Show();
         }
     }
 }

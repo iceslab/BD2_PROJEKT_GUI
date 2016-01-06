@@ -32,6 +32,7 @@ namespace Terminal
             InitializeComponent();
             connection = new SqlConnection(connectionString);
             FillDataGrid();
+            FillOtherDataGrid();
         }
 
         private void FillDataGrid()
@@ -62,8 +63,9 @@ namespace Terminal
         {
             ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter adapter =
                 new ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter();
-            var table = adapter.GetData();
-
+            //DataTable table = new DataTable("Dane klientów");
+            ManagerDataSet.AIRCRAFT_MODELSDataTable table = adapter.GetData();
+            //adapter.Fill(table);
             otherDataGrid.ItemsSource = table.DefaultView;
             //adapter.Update(table);
         }
