@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>TerminalMSSQL</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c9ef9d3a-fdd5-41aa-b929-3e4afdf8fe85}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>TerminalMSSQL</RootNamespace>
+    <AssemblyName>TerminalMSSQL</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>True</GenerateCreateScript>
+    <Containment>None</Containment>
+    <IsEncryptionOn>True</IsEncryptionOn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Deployment Scripts" />
+    <Folder Include="Views" />
+    <Folder Include="Tables" />
+    <Folder Include="Sequences" />
+    <Folder Include="Users" />
+    <Folder Include="Logins" />
+    <Folder Include="Functions" />
+    <Folder Include="Example Scripts" />
+    <Folder Include="Data Scripts" />
+    <Folder Include="Others Xml" />
+    <Folder Include="Triggers" />
+    <Folder Include="Indices" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Deployment Scripts\post_deployment.sql" />
+    <PreDeploy Include="Deployment Scripts\pre_deployment.sql" />
+    <Build Include="Views\RESERVATION_VIEW.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data Scripts\AIRCRAFT_MODELS_INSERT.sql" />
+    <None Include="Data Scripts\AIRCRAFTS_INSERT.sql" />
+    <None Include="Others Xml\TerminalMSSQL_1.publish.xml" />
+    <None Include="Others Xml\TerminalMSSQL.publish.xml" />
+    <None Include="Others Xml\LoginWithSA.publish.xml" />
+    <None Include="Data Scripts\INFRASTRUCTURE_INSERT.sql" />
+    <None Include="Data Scripts\MAINTENANCE_INSERT.sql" />
+    <None Include="Data Scripts\ALTER_GRANT_SCRIPT.sql" />
+    <None Include="Data Scripts\RESERVATIONS_INSERT.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Others Xml\TerminalMSSQL.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\ACCOUNTS.sql" />
+    <Build Include="Tables\AGENTS.sql" />
+    <Build Include="Sequences\CONTACT_DATA_SEQUENCE.sql" />
+    <Build Include="Users\AGENT_DBUSER.sql" />
+    <Build Include="Users\EMPLOYEE_DBUSER.sql" />
+    <Build Include="Users\MANAGER_DBUSER.sql" />
+    <Build Include="Sequences\ACCOUNTS_SEQUENCE.sql" />
+    <Build Include="Sequences\CLIENTS_SEQUENCE.sql" />
+    <Build Include="Sequences\AGENTS_SEQUENCE.sql" />
+    <Build Include="Sequences\AIRCRAFT_MODELS_SEQUENCE.sql" />
+    <Build Include="Sequences\MAINTENANCE_SEQUENCE.sql" />
+    <Build Include="Sequences\LOGS_SEQUENCE.sql" />
+    <Build Include="Sequences\RESERVATIONS_SEQUENCE.sql" />
+    <Build Include="Sequences\INFRASTRUCTURE_SEQUENCE.sql" />
+    <Build Include="Sequences\RESERVATION_CYCLE_SEQUENCE.sql" />
+    <Build Include="Logins\AGENT_LOGIN.sql" />
+    <Build Include="Functions\VALIDATE_CREDENTIALS_FUNCTION.sql" />
+    <Build Include="Logins\EMPLOYEE_LOGIN.sql" />
+    <Build Include="Logins\MANAGER_LOGIN.sql" />
+    <Build Include="Logins\VALIDATE_CREDENTIALS_LOGIN.sql" />
+    <Build Include="Users\VALIDATE_CREDENTIALS_DBUSER.sql" />
+    <None Include="Example Scripts\SELECTS.sql" />
+    <None Include="Data Scripts\ACCOUNTS_INSERT.sql" />
+    <None Include="Data Scripts\AGENTS_DATA_INSERT.sql" />
+    <None Include="Data Scripts\CLIENTS_DATA_INSERT.sql" />
+    <None Include="Data Scripts\CONTACT_DATA_INSERT.sql" />
+    <Build Include="Triggers\LOGGING_TRIGGER.sql" />
+    <Build Include="Indices\CONTACT_DATA_INDEX.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\AIRCRAFT_MODELS.sql" />
+    <Build Include="Tables\AIRCRAFTS.sql" />
+    <Build Include="Tables\CLIENTS.sql" />
+    <Build Include="Tables\CONTACT_DATA.sql" />
+    <Build Include="Tables\INFRASTRUCTURE.sql" />
+    <Build Include="Tables\LOGS.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\MAINTENANCE.sql" />
+    <Build Include="Tables\RESERVATIONS.sql" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Terminal" x:Class="Terminal.StaffWindow"
+        Title="Cieśla-Kardas Airport" Height="487.333" Width="698" Background="#FF99D9EA" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="320*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="147"/>
+            <ColumnDefinition Width="314*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" Width="127">
+            <Label Content="Klienci" HorizontalAlignment="Center"/>
+            <Button Content="Oczekujący" Margin="0,0,0,5"/>
+            <Button Content="Przegląd" Margin="0,0,0,5"/>
+            <Label Content="Rezerwacje" HorizontalAlignment="Center"/>
+            <Button Content="Oczekujące" Margin="0,0,0,5"/>
+            <Button Content="Przegląd" Margin="0,0,0,5"/>
+            <Button Content="Edycja" Margin="0,0,0,5"/>
+            <Label Content="Infrastruktura" HorizontalAlignment="Center"/>
+            <Button Content="Przegląd" Margin="0,0,0,5"/>
+            <Button Content="Wyłączenia" Margin="0,0,0,5"/>
+            <Button Content="Edycja" Margin="0,0,0,5"/>
+            <Label Content="Inne" HorizontalAlignment="Center"/>
+            <Button Content="Kontakt" Margin="0,0,0,5"/>
+            <Button Content="Zgłość problem" Margin="0,0,0,5"/>
+        </StackPanel>
+        <Button Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" />
+        <Image Source="Graphics/airport-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2"/>
+    </Grid>
+</Window>
