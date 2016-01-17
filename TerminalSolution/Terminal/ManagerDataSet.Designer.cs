@@ -5846,15 +5846,15 @@ namespace Terminal.ManagerDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AGENT_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AGENT_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ACCOUNTS] ([ACCOUNT_ID], [LOGIN], [PASSWORD], [PERMISSIONS], [STATUS], [AGENT_ID]) VALUES (@ACCOUNT_ID, @LOGIN, @PASSWORD, @PERMISSIONS, @STATUS, @AGENT_ID);
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ACCOUNTS] ([ACCOUNT_ID], [LOGIN], [PASSWORD], [PERMISSIONS], [STATUS], [AGENT_ID]) VALUES (@ACCOUNT_ID, @LOGIN, @PASSWORD, @PERMISSIONS, @STATUS, @AGENT_ID);  
 SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS WHERE (ACCOUNT_ID = @ACCOUNT_ID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNT_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ACCOUNT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOGIN", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LOGIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PERMISSIONS", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PERMISSIONS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@STATUS", global::System.Data.SqlDbType.TinyInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "STATUS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AGENT_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AGENT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNT_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ACCOUNT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOGIN", global::System.Data.SqlDbType.VarChar, 16, global::System.Data.ParameterDirection.Input, 0, 0, "LOGIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PERMISSIONS", global::System.Data.SqlDbType.TinyInt, 1, global::System.Data.ParameterDirection.Input, 0, 0, "PERMISSIONS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@STATUS", global::System.Data.SqlDbType.TinyInt, 1, global::System.Data.ParameterDirection.Input, 0, 0, "STATUS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AGENT_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "AGENT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ACCOUNTS] SET [ACCOUNT_ID] = @ACCOUNT_ID, [LOGIN] = @LOGIN, [PASSWORD] = @PASSWORD, [PERMISSIONS] = @PERMISSIONS, [STATUS] = @STATUS, [AGENT_ID] = @AGENT_ID WHERE (([ACCOUNT_ID] = @Original_ACCOUNT_ID) AND ([LOGIN] = @Original_LOGIN) AND ([PASSWORD] = @Original_PASSWORD) AND ([PERMISSIONS] = @Original_PERMISSIONS) AND ([STATUS] = @Original_STATUS) AND ((@IsNull_AGENT_ID = 1 AND [AGENT_ID] IS NULL) OR ([AGENT_ID] = @Original_AGENT_ID)));
@@ -5885,12 +5885,23 @@ SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM dbo.ACCOUN" +
                 "TS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO ACCOUNTS\r\n                         (LOGIN, PASSWORD, PERMISSIONS, STA" +
+                "TUS, AGENT_ID)\r\nVALUES        (@LOGIN,@PASSWORD,@PERMISSIONS,@STATUS,@AGENT_ID);" +
+                "   \r\n";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOGIN", global::System.Data.SqlDbType.VarChar, 16, global::System.Data.ParameterDirection.Input, 0, 0, "LOGIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PERMISSIONS", global::System.Data.SqlDbType.TinyInt, 1, global::System.Data.ParameterDirection.Input, 0, 0, "PERMISSIONS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@STATUS", global::System.Data.SqlDbType.TinyInt, 1, global::System.Data.ParameterDirection.Input, 0, 0, "STATUS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AGENT_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "AGENT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6104,6 +6115,49 @@ SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS 
         public virtual int Update(string LOGIN, string PASSWORD, byte PERMISSIONS, byte STATUS, global::System.Nullable<int> AGENT_ID, int Original_ACCOUNT_ID, string Original_LOGIN, string Original_PASSWORD, byte Original_PERMISSIONS, byte Original_STATUS, global::System.Nullable<int> Original_AGENT_ID) {
             return this.Update(Original_ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID, Original_ACCOUNT_ID, Original_LOGIN, Original_PASSWORD, Original_PERMISSIONS, Original_STATUS, Original_AGENT_ID);
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(string LOGIN, string PASSWORD, byte PERMISSIONS, byte STATUS, global::System.Nullable<int> AGENT_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((LOGIN == null)) {
+                throw new global::System.ArgumentNullException("LOGIN");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(LOGIN));
+            }
+            if ((PASSWORD == null)) {
+                throw new global::System.ArgumentNullException("PASSWORD");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(PASSWORD));
+            }
+            command.Parameters[2].Value = ((byte)(PERMISSIONS));
+            command.Parameters[3].Value = ((byte)(STATUS));
+            if ((AGENT_ID.HasValue == true)) {
+                command.Parameters[4].Value = ((int)(AGENT_ID.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -6266,11 +6320,17 @@ SELECT AGENT_ID, CONTACT_DATA_ID FROM AGENTS WHERE (AGENT_ID = @AGENT_ID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT AGENT_ID, CONTACT_DATA_ID FROM dbo.AGENTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO AGENTS\r\n                         (CONTACT_DATA_ID)\r\nVALUES        (@C" +
+                "ONTACT_DATA_ID); \r\n";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6403,6 +6463,30 @@ SELECT AGENT_ID, CONTACT_DATA_ID FROM AGENTS WHERE (AGENT_ID = @AGENT_ID)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int CONTACT_DATA_ID, int Original_AGENT_ID, int Original_CONTACT_DATA_ID) {
             return this.Update(Original_AGENT_ID, CONTACT_DATA_ID, Original_AGENT_ID, Original_CONTACT_DATA_ID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(int CONTACT_DATA_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(CONTACT_DATA_ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -6583,12 +6667,21 @@ SELECT AIRCRAFT_MODEL_ID, TYPE, SIZE, MODEL_NAME, MANUFACTURER FROM AIRCRAFT_MOD
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT AIRCRAFT_MODEL_ID, TYPE, SIZE, MODEL_NAME, MANUFACTURER FROM dbo.AIRCRAFT_" +
                 "MODELS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO AIRCRAFT_MODELS\r\n                         (TYPE, SIZE, MODEL_NAME, MA" +
+                "NUFACTURER)\r\nVALUES        (@TYPE,@SIZE,@MODEL_NAME,@MANUFACTURER); \r\n";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TYPE", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TYPE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SIZE", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "SIZE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MODEL_NAME", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "MODEL_NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MANUFACTURER", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "MANUFACTURER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6821,6 +6914,53 @@ SELECT AIRCRAFT_MODEL_ID, TYPE, SIZE, MODEL_NAME, MANUFACTURER FROM AIRCRAFT_MOD
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string TYPE, string SIZE, string MODEL_NAME, string MANUFACTURER, int Original_AIRCRAFT_MODEL_ID, string Original_TYPE, string Original_SIZE, string Original_MODEL_NAME, string Original_MANUFACTURER) {
             return this.Update(Original_AIRCRAFT_MODEL_ID, TYPE, SIZE, MODEL_NAME, MANUFACTURER, Original_AIRCRAFT_MODEL_ID, Original_TYPE, Original_SIZE, Original_MODEL_NAME, Original_MANUFACTURER);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(string TYPE, string SIZE, string MODEL_NAME, string MANUFACTURER) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((TYPE == null)) {
+                throw new global::System.ArgumentNullException("TYPE");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(TYPE));
+            }
+            if ((SIZE == null)) {
+                throw new global::System.ArgumentNullException("SIZE");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(SIZE));
+            }
+            if ((MODEL_NAME == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(MODEL_NAME));
+            }
+            if ((MANUFACTURER == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(MANUFACTURER));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -7328,11 +7468,17 @@ SELECT CLIENT_ID, CONTACT_DATA_ID FROM CLIENTS WHERE (CLIENT_ID = @CLIENT_ID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT CLIENT_ID, CONTACT_DATA_ID FROM dbo.CLIENTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO CLIENTS\r\n                         (CONTACT_DATA_ID)\r\nVALUES        (@" +
+                "CONTACT_DATA_ID); ";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7465,6 +7611,30 @@ SELECT CLIENT_ID, CONTACT_DATA_ID FROM CLIENTS WHERE (CLIENT_ID = @CLIENT_ID)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int CONTACT_DATA_ID, int Original_CLIENT_ID, int Original_CONTACT_DATA_ID) {
             return this.Update(Original_CLIENT_ID, CONTACT_DATA_ID, Original_CLIENT_ID, Original_CONTACT_DATA_ID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(int CONTACT_DATA_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(CONTACT_DATA_ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -7658,12 +7828,25 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE" +
                 "_NUMBER FROM dbo.CONTACT_DATA";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO CONTACT_DATA\r\n                         (NAME, ADDRESS1, ADDRESS2, CIT" +
+                "Y, POSTAL_CODE, EMAIL, PHONE_NUMBER)\r\nVALUES        (@NAME,@ADDRESS1,@ADDRESS2,@" +
+                "CITY,@POSTAL_CODE,@EMAIL,@PHONE_NUMBER); ";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS1", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS2", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CITY", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "CITY", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@POSTAL_CODE", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "POSTAL_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMAIL", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "EMAIL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PHONE_NUMBER", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PHONE_NUMBER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7981,6 +8164,71 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         public virtual int Update(string NAME, string ADDRESS1, string ADDRESS2, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER, int Original_CONTACT_DATA_ID, string Original_NAME, string Original_ADDRESS1, string Original_ADDRESS2, string Original_CITY, string Original_POSTAL_CODE, string Original_EMAIL, string Original_PHONE_NUMBER) {
             return this.Update(Original_CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE_NUMBER, Original_CONTACT_DATA_ID, Original_NAME, Original_ADDRESS1, Original_ADDRESS2, Original_CITY, Original_POSTAL_CODE, Original_EMAIL, Original_PHONE_NUMBER);
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(string NAME, string ADDRESS1, string ADDRESS2, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(NAME));
+            }
+            if ((ADDRESS1 == null)) {
+                throw new global::System.ArgumentNullException("ADDRESS1");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ADDRESS1));
+            }
+            if ((ADDRESS2 == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(ADDRESS2));
+            }
+            if ((CITY == null)) {
+                throw new global::System.ArgumentNullException("CITY");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(CITY));
+            }
+            if ((POSTAL_CODE == null)) {
+                throw new global::System.ArgumentNullException("POSTAL_CODE");
+            }
+            else {
+                command.Parameters[4].Value = ((string)(POSTAL_CODE));
+            }
+            if ((EMAIL == null)) {
+                throw new global::System.ArgumentNullException("EMAIL");
+            }
+            else {
+                command.Parameters[5].Value = ((string)(EMAIL));
+            }
+            if ((PHONE_NUMBER == null)) {
+                throw new global::System.ArgumentNullException("PHONE_NUMBER");
+            }
+            else {
+                command.Parameters[6].Value = ((string)(PHONE_NUMBER));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -8156,11 +8404,19 @@ SELECT OBJECT_ID, SIZE, TYPE, NAME FROM INFRASTRUCTURE WHERE (OBJECT_ID = @OBJEC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT OBJECT_ID, SIZE, TYPE, NAME FROM dbo.INFRASTRUCTURE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO INFRASTRUCTURE\r\n                         (SIZE, TYPE, NAME)\r\nVALUES  " +
+                "      (@SIZE,@TYPE,@NAME); \r\n";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SIZE", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "SIZE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TYPE", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TYPE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8365,6 +8621,47 @@ SELECT OBJECT_ID, SIZE, TYPE, NAME FROM INFRASTRUCTURE WHERE (OBJECT_ID = @OBJEC
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string SIZE, string TYPE, string NAME, int Original_OBJECT_ID, string Original_SIZE, string Original_TYPE, string Original_NAME) {
             return this.Update(Original_OBJECT_ID, SIZE, TYPE, NAME, Original_OBJECT_ID, Original_SIZE, Original_TYPE, Original_NAME);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(string SIZE, string TYPE, string NAME) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((SIZE == null)) {
+                throw new global::System.ArgumentNullException("SIZE");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(SIZE));
+            }
+            if ((TYPE == null)) {
+                throw new global::System.ArgumentNullException("TYPE");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(TYPE));
+            }
+            if ((NAME == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(NAME));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -8909,12 +9206,22 @@ SELECT MAINTENANCE_ID, OBJECT_ID, BEGIN_DATE, END_DATE, DESCRIPTION FROM MAINTEN
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT MAINTENANCE_ID, OBJECT_ID, BEGIN_DATE, END_DATE, DESCRIPTION FROM dbo.MAIN" +
                 "TENANCE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO MAINTENANCE\r\n                         (OBJECT_ID, BEGIN_DATE, END_DAT" +
+                "E, DESCRIPTION)\r\nVALUES        (@OBJECT_ID,@BEGIN_DATE,@END_DATE,@DESCRIPTION); " +
+                "";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OBJECT_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "OBJECT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BEGIN_DATE", global::System.Data.SqlDbType.DateTime2, 8, global::System.Data.ParameterDirection.Input, 0, 0, "BEGIN_DATE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@END_DATE", global::System.Data.SqlDbType.DateTime2, 8, global::System.Data.ParameterDirection.Input, 0, 0, "END_DATE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DESCRIPTION", global::System.Data.SqlDbType.Text, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "DESCRIPTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9067,6 +9374,48 @@ SELECT MAINTENANCE_ID, OBJECT_ID, BEGIN_DATE, END_DATE, DESCRIPTION FROM MAINTEN
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int OBJECT_ID, System.DateTime BEGIN_DATE, System.DateTime END_DATE, string DESCRIPTION, int Original_MAINTENANCE_ID, int Original_OBJECT_ID, System.DateTime Original_BEGIN_DATE, System.DateTime Original_END_DATE) {
             return this.Update(Original_MAINTENANCE_ID, OBJECT_ID, BEGIN_DATE, END_DATE, DESCRIPTION, Original_MAINTENANCE_ID, Original_OBJECT_ID, Original_BEGIN_DATE, Original_END_DATE);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(int OBJECT_ID, string BEGIN_DATE, string END_DATE, string DESCRIPTION) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(OBJECT_ID));
+            if ((BEGIN_DATE == null)) {
+                throw new global::System.ArgumentNullException("BEGIN_DATE");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(BEGIN_DATE));
+            }
+            if ((END_DATE == null)) {
+                throw new global::System.ArgumentNullException("END_DATE");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(END_DATE));
+            }
+            if ((DESCRIPTION == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(DESCRIPTION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -9255,12 +9604,26 @@ SELECT RESERVATIONS_ID, AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT RESERVATIONS_ID, AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, I" +
                 "S_FINALIZED FROM dbo.RESERVATIONS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"INSERT INTO RESERVATIONS
+                         (AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, IS_FINALIZED)
+VALUES        (@AIRCRAFT_ID,@OBJECT_ID,@BEGIN_DATE,@END_DATE,@CYCLE_ID,@IS_FINALIZED); 
+SELECT RESERVATIONS_ID, AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, IS_FINALIZED FROM RESERVATIONS WHERE (RESERVATIONS_ID = @RESERVATIONS_ID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AIRCRAFT_ID", global::System.Data.SqlDbType.VarChar, 8, global::System.Data.ParameterDirection.Input, 0, 0, "AIRCRAFT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OBJECT_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "OBJECT_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BEGIN_DATE", global::System.Data.SqlDbType.DateTime2, 6, global::System.Data.ParameterDirection.Input, 0, 0, "BEGIN_DATE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@END_DATE", global::System.Data.SqlDbType.DateTime2, 6, global::System.Data.ParameterDirection.Input, 0, 0, "END_DATE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CYCLE_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CYCLE_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IS_FINALIZED", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "IS_FINALIZED", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RESERVATIONS_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "RESERVATIONS_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9457,6 +9820,56 @@ SELECT RESERVATIONS_ID, AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string AIRCRAFT_ID, int OBJECT_ID, System.DateTime BEGIN_DATE, System.DateTime END_DATE, global::System.Nullable<int> CYCLE_ID, bool IS_FINALIZED, int Original_RESERVATIONS_ID, string Original_AIRCRAFT_ID, int Original_OBJECT_ID, System.DateTime Original_BEGIN_DATE, System.DateTime Original_END_DATE, global::System.Nullable<int> Original_CYCLE_ID, bool Original_IS_FINALIZED) {
             return this.Update(Original_RESERVATIONS_ID, AIRCRAFT_ID, OBJECT_ID, BEGIN_DATE, END_DATE, CYCLE_ID, IS_FINALIZED, Original_RESERVATIONS_ID, Original_AIRCRAFT_ID, Original_OBJECT_ID, Original_BEGIN_DATE, Original_END_DATE, Original_CYCLE_ID, Original_IS_FINALIZED);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertWithSequence(string AIRCRAFT_ID, int OBJECT_ID, string BEGIN_DATE, string END_DATE, global::System.Nullable<int> CYCLE_ID, bool IS_FINALIZED, int RESERVATIONS_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((AIRCRAFT_ID == null)) {
+                throw new global::System.ArgumentNullException("AIRCRAFT_ID");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(AIRCRAFT_ID));
+            }
+            command.Parameters[1].Value = ((int)(OBJECT_ID));
+            if ((BEGIN_DATE == null)) {
+                throw new global::System.ArgumentNullException("BEGIN_DATE");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(BEGIN_DATE));
+            }
+            if ((END_DATE == null)) {
+                throw new global::System.ArgumentNullException("END_DATE");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(END_DATE));
+            }
+            if ((CYCLE_ID.HasValue == true)) {
+                command.Parameters[4].Value = ((int)(CYCLE_ID.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[5].Value = ((bool)(IS_FINALIZED));
+            command.Parameters[6].Value = ((int)(RESERVATIONS_ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

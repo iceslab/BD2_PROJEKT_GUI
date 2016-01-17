@@ -28,9 +28,7 @@ namespace Terminal
                 new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
             var login = loginTBox.Text;
             var hash = CalculateMD5Hash(passwordTBox.Password);
-            int? permissions = tableAdapter.VALIDATE_CREDENTIALS_FUNCTION(login, hash);;
-
-            Console.WriteLine(CalculateMD5Hash("hash10"));
+            int? permissions = tableAdapter.VALIDATE_CREDENTIALS_FUNCTION(login, hash);
 
             if (permissions != null)
             {
@@ -61,7 +59,7 @@ namespace Terminal
 
         }
 
-        public string CalculateMD5Hash(string input)
+        public static string CalculateMD5Hash(string input)
         {
             // step 1, calculate MD5 hash from input
             MD5 md5 = MD5.Create();
