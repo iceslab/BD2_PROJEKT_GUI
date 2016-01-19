@@ -36,7 +36,9 @@ namespace Terminal
             ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
                 new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
             // Przykładowe użycie InsertWithSequence 
-            //x.InsertWithSequence("m.m", Login.CalculateMD5Hash("1"), 1, 1, null);
+            //x.InsertWithSequence("man", Login.CalculateMD5Hash("1"), 1, 0, null);
+            //x.InsertWithSequence("emp", Login.CalculateMD5Hash("1"), 2, 0, null);
+            //x.InsertWithSequence("age", Login.CalculateMD5Hash("1"), 3, 0, null);
         }
 
         private void FillDataGrid()
@@ -73,5 +75,24 @@ namespace Terminal
             otherDataGrid.ItemsSource = table.DefaultView;
             //adapter.Update(table);
         }
+
+        private void clientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl.Items.Clear();
+            //DataGrid clientsDataGrid
+            Grid clientsGrid = new Grid();
+            //clientsGrid.
+            TabItem clientsData = new TabItem();
+            clientsData.Header = "Dane klientów";
+            //clientsData.Content = 
+
+            TabItem statistics = new TabItem();
+
+            statistics.Header = "Statystyki";
+
+
+            //tabControl.Items.Add();
+        }
+
     }
 }
