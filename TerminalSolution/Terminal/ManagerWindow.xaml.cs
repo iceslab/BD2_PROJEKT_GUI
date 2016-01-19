@@ -33,6 +33,10 @@ namespace Terminal
             connection = new SqlConnection(connectionString);
             FillDataGrid();
             FillOtherDataGrid();
+            ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
+                new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
+            // Przykładowe użycie InsertSequence 
+            x.InsertSequence("m.m", Login.CalculateMD5Hash("1"), 1, 1, null);
         }
 
         private void FillDataGrid()

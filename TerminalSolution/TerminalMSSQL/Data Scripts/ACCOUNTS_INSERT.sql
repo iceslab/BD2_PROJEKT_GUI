@@ -1,17 +1,17 @@
 ﻿PRINT N'Inserting values into [dbo].[ACCOUNTS]...';
 INSERT INTO [TerminalMSSQL].[dbo].[ACCOUNTS]
 VALUES 
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'm.nowak','5ee23b07c4275dad8e102b05c9636fd4', 3, 0, 1),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'b.lecina','hash02', 3, 0, 2),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  's.kasztan','hash03', 3, 0, 3),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'p.ulan','hash04', 3, 0, 4),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'l.hajdu','hash05', 3, 0, 5),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'a.samotny','hash06', 3, 0, 6),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.konieczna','hash07', 2, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.czarnecki','hash08', 2, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.wieczorek','hash09', 2, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.wisniewski','162de50854fb25ea3fd8640282cb67b4', 1, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.nowakowski','hash11', 1, 0, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.czerwinski','hash12', 1, 1, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.trocki','hash13', 2, 1, null),
-(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'a.pawlowska','hash14', 3, 1, null)
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'm.nowak','5ee23b07c4275dad8e102b05c9636fd4', 3, 0, 1),--hash01: 5ee23b07c4275dad8e102b05c9636fd4
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'b.lecina','4aa9a4502e8b4b002d4502ea67360d07', 3, 0, 2),--hash02: 4aa9a4502e8b4b002d4502ea67360d07
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  's.kasztan','cef94a3c793458c3002f108ceeff8046', 3, 0, 3),--hash03: cef94a3c793458c3002f108ceeff8046
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'p.ulan','f2cb28f7df004ab015696ffec39e283b', 3, 0, 4),--hash04: f2cb28f7df004ab015696ffec39e283b
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'l.hajdu','25773b34ef67e16db10086ed085e2def', 3, 0, 5),--hash05: 25773b34ef67e16db10086ed085e2def
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'a.samotny','a0c729842d12fcde01093288531ad3b8', 3, 0, 6),--hash06: a0c729842d12fcde01093288531ad3b8
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.konieczna','5003aa256987fe3e74043acffe06f01d', 2, 0, null),--hash07: 5003aa256987fe3e74043acffe06f01d
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.czarnecki','75696df9762b777cfb3e07c16c74e521', 2, 0, null),--hash08: 75696df9762b777cfb3e07c16c74e521
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.wieczorek','2d5e48de8958211efc7478a1146373e9', 2, 0, null),--hash09: 2d5e48de8958211efc7478a1146373e9
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.wisniewski','162de50854fb25ea3fd8640282cb67b4', 1, 0, null),--hash10: 162de50854fb25ea3fd8640282cb67b4
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.nowakowski','60fb0f5e78a63d2ec1c0e5932701a219', 1, 0, null),--hash11: 60fb0f5e78a63d2ec1c0e5932701a219
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'man.czerwinski','9bc9b43e7807a162c5dab313a1cf8dab', 1, 1, null),--hash12: 9bc9b43e7807a162c5dab313a1cf8dab
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'emp.trocki','5a1c53dff78b5a6bc2f79ae21ecb0873', 2, 1, null),--hash13: 5a1c53dff78b5a6bc2f79ae21ecb0873
+(NEXT VALUE FOR [ACCOUNTS_SEQUENCE],  'a.pawlowska','29228ee7d907eb4e004a51f2ae1f8e3e', 3, 1, null)--hash14: 29228ee7d907eb4e004a51f2ae1f8e3e
