@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -22,76 +23,105 @@ namespace Terminal
     /// </summary>
     public partial class ManagerWindow : Window
     {
-
+        private enum TabViewType
+        {
+            CLIENTSVIEW,
+            AIRCRAFSTVIEW,
+            INFRASTRUCTUREVIEW,
+            MAINTANANCEVIEW,
+            RESERVATIONSVIEW
+        };
+        private TabViewType viewType;
         private static readonly String connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.Manager"].ConnectionString;
         private SqlConnection connection;
-
+        
 
         public ManagerWindow()
         {
             InitializeComponent();
+            
             connection = new SqlConnection(connectionString);
-            FillDataGrid();
-            FillOtherDataGrid();
             ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
                 new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
-            // Przykładowe użycie InsertWithSequence 
-            //x.InsertWithSequence("man", Login.CalculateMD5Hash("1"), 1, 0, null);
-            //x.InsertWithSequence("emp", Login.CalculateMD5Hash("1"), 2, 0, null);
-            //x.InsertWithSequence("age", Login.CalculateMD5Hash("1"), 3, 0, null);
         }
 
-        private void FillDataGrid()
+        private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)
         {
-            try
-            {
-                connection.Open();
-                String query = "select * from [dbo].CONTACT_DATA";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.ExecuteNonQuery();
-
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataTable table = new DataTable("Dane klientów");
-
-                adapter.Fill(table);
-                clientsDataGrid.ItemsSource = table.DefaultView;
-                adapter.Update(table);
-
-                connection.Close();
-            }
-            catch (SqlException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
+            var table = adapter.GetData();
+            DGTabView.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGTabView.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGTabView.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.MAINTENANCETableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGTabView.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.RESERVATIONSTableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGTabView.ItemsSource = table.DefaultView;
         }
 
-        private void FillOtherDataGrid()
+        private void changeTab(TabViewType type)
         {
-            ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter adapter =
-                new ManagerDataSetTableAdapters.AIRCRAFT_MODELSTableAdapter();
-            //DataTable table = new DataTable("Dane klientów");
-            ManagerDataSet.AIRCRAFT_MODELSDataTable table = adapter.GetData();
-            //adapter.Fill(table);
-            otherDataGrid.ItemsSource = table.DefaultView;
-            //adapter.Update(table);
+            switch(type)
+            {
+                case TabViewType.CLIENTSVIEW:
+                    TIData.Header = "Dane klientów";
+                    FillDataGrid(new ManagerDataSetTableAdapters.CLIENTSTableAdapter());
+                    break;
+                case TabViewType.AIRCRAFSTVIEW:
+                    TIData.Header = "Samoloty przegląd";
+                    FillDataGrid(new ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter());
+                    break;
+                case TabViewType.INFRASTRUCTUREVIEW:
+                    TIData.Header = "Infrastruktura przegląd";
+                    FillDataGrid(new ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter());
+                    break;
+                case TabViewType.MAINTANANCEVIEW:
+                    TIData.Header = "Planowane remonty";
+                    FillDataGrid(new ManagerDataSetTableAdapters.MAINTENANCETableAdapter());
+                    break;
+                case TabViewType.RESERVATIONSVIEW:
+                    TIData.Header = "Aktualne rezerwacje";
+                    FillDataGrid(new ManagerDataSetTableAdapters.RESERVATIONSTableAdapter());
+                    break;
+
+            }
         }
 
         private void clientsButton_Click(object sender, RoutedEventArgs e)
         {
-            tabControl.Items.Clear();
-            //DataGrid clientsDataGrid
-            Grid clientsGrid = new Grid();
-            //clientsGrid.
-            TabItem clientsData = new TabItem();
-            clientsData.Header = "Dane klientów";
-            //clientsData.Content = 
+            changeTab(TabViewType.CLIENTSVIEW);
+        }
 
-            TabItem statistics = new TabItem();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            changeTab(TabViewType.AIRCRAFSTVIEW);
+        }
 
-            statistics.Header = "Statystyki";
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            changeTab(TabViewType.INFRASTRUCTUREVIEW);
+        }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            changeTab(TabViewType.MAINTANANCEVIEW);
+        }
 
-            //tabControl.Items.Add();
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            changeTab(TabViewType.RESERVATIONSVIEW);
         }
 
     }

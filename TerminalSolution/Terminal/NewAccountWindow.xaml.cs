@@ -86,7 +86,6 @@ namespace Terminal
                                     TBClientEmail.Text, 
                                     TBAgentPhoneNumber.Text );
             System.Console.WriteLine("Insert poszedł!");
-            var result = x.GetDataBy1(TBClientName.Text);
         }
     }
 }
