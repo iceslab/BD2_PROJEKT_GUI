@@ -8,9 +8,9 @@ SELECT * FROM [TerminalMSSQL].[dbo].[MAINTENANCE];
 SELECT * FROM [TerminalMSSQL].[dbo].[LOGS];
 SELECT * FROM [TerminalMSSQL].[dbo].[RESERVATION_VIEW];
 
-INSERT INTO [dbo].[CONTACT_DATA]
-VALUES 
-(NEXT VALUE FOR [CONTACT_DATA_SEQUENCE], 'Ryanair Ltd.','Corporate Head Office Airside Business Park', 'Swords', 'Dublin', 'K67', 'contact@ryanair.com', '845987658' )
+--INSERT INTO [dbo].[CONTACT_DATA]
+--VALUES 
+--(NEXT VALUE FOR [CONTACT_DATA_SEQUENCE], 'Ryanair Ltd.','Corporate Head Office Airside Business Park', 'Swords', 'Dublin', 'K67', 'contact@ryanair.com', '845987658' )
 
 --SELECT NAME, ADDRESS1, ADDRESS2, CITY, EMAIL, [LOGIN], [PASSWORD], AC.[PERMISSIONS]
 --FROM CONTACT_DATA AS C INNER JOIN AGENTS AS A ON C.CONTACT_DATA_ID = A.CONTACT_DATA_ID

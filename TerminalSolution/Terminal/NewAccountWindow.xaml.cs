@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,13 @@ using System.Windows.Shapes;
 
 namespace Terminal
 {
-    /// <summary>
-    /// Interaction logic for NewAccountWindow.xaml
-    /// </summary>
+
+
     public partial class NewAccountWindow : Window
     {
+        private static readonly String connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.Manager"].ConnectionString;
+        private SqlConnection connection;
+
         public NewAccountWindow()
         {
             InitializeComponent();
@@ -56,19 +60,33 @@ namespace Terminal
             
             //adapter.Inert()???
             
-            EmployeeDataSet.CONTACT_DATADataTable table = adapter.GetData();
-            EmployeeDataSet.CONTACT_DATARow row = (EmployeeDataSet.CONTACT_DATARow)table.NewRow();
+            //EmployeeDataSet.CONTACT_DATADataTable table = adapter.GetData();
+            //EmployeeDataSet.CONTACT_DATARow row = (EmployeeDataSet.CONTACT_DATARow)table.NewRow();
 
-            row.NAME = TBClientCity.Text;
-            row.ADDRESS1 = TBClientStreet.Text;
-            row.CITY = TBClientCity.Text;
-            row.POSTAL_CODE = TBClientPostCode.Text;
-            row.EMAIL = TBClientEmail.Text;
-            row.PHONE_NUMBER = TBClientPhoneNumber.Text;
+            //row.NAME = TBClientCity.Text;
+            //row.ADDRESS1 = TBClientStreet.Text;
+            //row.CITY = TBClientCity.Text;
+            //row.POSTAL_CODE = TBClientPostCode.Text;
+            //row.EMAIL = TBClientEmail.Text;
+            //row.PHONE_NUMBER = TBClientPhoneNumber.Text;
 
-            table.AddCONTACT_DATARow(row);
-            adapter.Update(table);
 
+
+            //table.AddCONTACT_DATARow(row);
+            //adapter.Update(table);
+
+            connection = new SqlConnection(connectionString);
+            EmployeeDataSetTableAdapters.CONTACT_DATATableAdapter x = 
+                new EmployeeDataSetTableAdapters.CONTACT_DATATableAdapter();
+            
+            x.InsertWithSequence(   TBClientName.Text, 
+                                    TBClientStreet.Text, "", 
+                                    TBClientCity.Text, 
+                                    TBAgentPostCode.Text, 
+                                    TBClientEmail.Text, 
+                                    TBAgentPhoneNumber.Text );
+            System.Console.WriteLine("Insert poszedł!");
+            var result = x.GetDataBy1(TBClientName.Text);
         }
     }
 }
