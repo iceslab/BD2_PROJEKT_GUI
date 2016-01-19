@@ -4687,6 +4687,11 @@ namespace Terminal {
                     base(rb) {
                 this.tableCONTACT_DATA = ((CONTACT_DATADataTable)(this.Table));
             }
+
+            public CONTACT_DATARow()
+            {
+                // TODO: Complete member initialization
+            }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
