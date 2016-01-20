@@ -50,6 +50,7 @@ namespace Terminal
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
+            new Login().Show();
             Close();
         }
     }
