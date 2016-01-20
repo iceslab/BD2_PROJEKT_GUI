@@ -20,6 +20,7 @@ namespace Terminal
         public Login()
         {
             InitializeComponent();
+            loginTBox.Focus();
         }
 
         private void LogInButtonClicked(object sender, RoutedEventArgs e)
@@ -28,6 +29,7 @@ namespace Terminal
                 new ValidateCredentialsDataSetTableAdapters.QueriesTableAdapter();
             var login = loginTBox.Text;
             var hash = CalculateMD5Hash(passwordTBox.Password);
+            passwordTBox.Password = null;
             int? permissions = tableAdapter.VALIDATE_CREDENTIALS_FUNCTION(login, hash);
 
             if (permissions != null)
@@ -56,7 +58,6 @@ namespace Terminal
             {
                 MessageBox.Show(this, "Zły login lub hasło", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
         public static string CalculateMD5Hash(string input)

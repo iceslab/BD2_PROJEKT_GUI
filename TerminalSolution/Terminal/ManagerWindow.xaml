@@ -22,7 +22,7 @@
             <Label Content="Inne" HorizontalAlignment="Center"/>
             <Button x:Name="reportButton" Content="Zgłość problem" Margin="0,0,0,5"/>
         </StackPanel>
-        <Button Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" />
+        <Button x:Name="logoutButton" Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" Click="logoutButton_Click" />
         <Image Source="Graphics/airport-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2"/>
         <TabControl x:Name="tabControl" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Margin="0,0,10,10">
             <TabItem Name ="TIData" Header="Dane klientów" Height="22" VerticalAlignment="Top">

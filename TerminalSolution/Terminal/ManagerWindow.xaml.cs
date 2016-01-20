@@ -121,5 +121,10 @@ namespace Terminal
             changeTab(TabViewType.RESERVATIONSVIEW);
         }
 
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
