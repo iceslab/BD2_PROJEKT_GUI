@@ -11,3 +11,10 @@ namespace Terminal {
         }
     }
 }
+
+namespace Terminal.EmployeeDataSetTableAdapters {
+    
+    
+    public partial class CONTACT_DATATableAdapter {
+    }
+}

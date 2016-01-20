@@ -87,7 +87,7 @@
       <DependentUpon>EmployeeDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EmployeeDataSet.Designer.cs">
+    <Compile Include="EmployeeDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeDataSet.xsd</DependentUpon>
@@ -180,9 +180,9 @@
       <DependentUpon>EmployeeDataSet.xsd</DependentUpon>
     </None>
     <None Include="EmployeeDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>EmployeeDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EmployeeDataSet1.Designer.cs</LastGenOutput>
     </None>
     <None Include="EmployeeDataSet.xss">
       <DependentUpon>EmployeeDataSet.xsd</DependentUpon>

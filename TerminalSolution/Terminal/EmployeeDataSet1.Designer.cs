@@ -5894,8 +5894,8 @@ SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS 
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "INSERT INTO ACCOUNTS\r\n                         (LOGIN, PASSWORD, PERMISSIONS, STA" +
-                "TUS, AGENT_ID)\r\nVALUES        (@LOGIN,@PASSWORD,@PERMISSIONS,@STATUS,@AGENT_ID);" +
-                " \r\n";
+                "TUS, AGENT_ID)\r\nOUTPUT INSERTED.ACCOUNT_ID\r\nVALUES        (@LOGIN,@PASSWORD,@PER" +
+                "MISSIONS,@STATUS,@AGENT_ID); \r\n";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOGIN", global::System.Data.SqlDbType.VarChar, 16, global::System.Data.ParameterDirection.Input, 0, 0, "LOGIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6120,7 +6120,7 @@ SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertWithSequence(string LOGIN, string PASSWORD, byte PERMISSIONS, byte STATUS, global::System.Nullable<int> AGENT_ID) {
+        public virtual object InsertWithSequence(string LOGIN, string PASSWORD, byte PERMISSIONS, byte STATUS, global::System.Nullable<int> AGENT_ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((LOGIN == null)) {
                 throw new global::System.ArgumentNullException("LOGIN");
@@ -6147,16 +6147,22 @@ SELECT ACCOUNT_ID, LOGIN, PASSWORD, PERMISSIONS, STATUS, AGENT_ID FROM ACCOUNTS 
                         != global::System.Data.ConnectionState.Open)) {
                 command.Connection.Open();
             }
-            int returnValue;
+            object returnValue;
             try {
-                returnValue = command.ExecuteNonQuery();
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     command.Connection.Close();
                 }
             }
-            return returnValue;
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
+            }
         }
     }
     
@@ -6327,8 +6333,8 @@ SELECT AGENT_ID, CONTACT_DATA_ID FROM AGENTS WHERE (AGENT_ID = @AGENT_ID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO AGENTS\r\n                         (CONTACT_DATA_ID)\r\nVALUES        (@C" +
-                "ONTACT_DATA_ID); ";
+            this._commandCollection[1].CommandText = "INSERT INTO AGENTS\r\n                         (CONTACT_DATA_ID)\r\nOUTPUT INSERTED.A" +
+                "GENT_ID\r\nVALUES        (@CONTACT_DATA_ID); ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -6469,7 +6475,7 @@ SELECT AGENT_ID, CONTACT_DATA_ID FROM AGENTS WHERE (AGENT_ID = @AGENT_ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertWithSequence(int CONTACT_DATA_ID) {
+        public virtual object InsertWithSequence(int CONTACT_DATA_ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(CONTACT_DATA_ID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
@@ -6477,16 +6483,22 @@ SELECT AGENT_ID, CONTACT_DATA_ID FROM AGENTS WHERE (AGENT_ID = @AGENT_ID)";
                         != global::System.Data.ConnectionState.Open)) {
                 command.Connection.Open();
             }
-            int returnValue;
+            object returnValue;
             try {
-                returnValue = command.ExecuteNonQuery();
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     command.Connection.Close();
                 }
             }
-            return returnValue;
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
+            }
         }
     }
     
@@ -7475,8 +7487,8 @@ SELECT CLIENT_ID, CONTACT_DATA_ID FROM CLIENTS WHERE (CLIENT_ID = @CLIENT_ID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO CLIENTS\r\n                         (CONTACT_DATA_ID)\r\nVALUES        (@" +
-                "CONTACT_DATA_ID); ";
+            this._commandCollection[1].CommandText = "INSERT INTO CLIENTS\r\n                         (CONTACT_DATA_ID)\r\nOUTPUT INSERTED." +
+                "CLIENT_ID\r\nVALUES        (@CONTACT_DATA_ID); ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -7617,7 +7629,7 @@ SELECT CLIENT_ID, CONTACT_DATA_ID FROM CLIENTS WHERE (CLIENT_ID = @CLIENT_ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertWithSequence(int CONTACT_DATA_ID) {
+        public virtual object InsertWithSequence(int CONTACT_DATA_ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(CONTACT_DATA_ID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
@@ -7625,16 +7637,22 @@ SELECT CLIENT_ID, CONTACT_DATA_ID FROM CLIENTS WHERE (CLIENT_ID = @CLIENT_ID)";
                         != global::System.Data.ConnectionState.Open)) {
                 command.Connection.Open();
             }
-            int returnValue;
+            object returnValue;
             try {
-                returnValue = command.ExecuteNonQuery();
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     command.Connection.Close();
                 }
             }
-            return returnValue;
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
+            }
         }
     }
     
@@ -7836,9 +7854,14 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO CONTACT_DATA\r\n                         (NAME, ADDRESS1, ADDRESS2, CIT" +
-                "Y, POSTAL_CODE, EMAIL, PHONE_NUMBER)\r\nOUTPUT INSERTED.ID\r\nVALUES        (@NAME,@" +
-                "ADDRESS1,@ADDRESS2,@CITY,@POSTAL_CODE,@EMAIL,@PHONE_NUMBER); \r\n\r\n\r\n";
+            this._commandCollection[1].CommandText = @"INSERT INTO CONTACT_DATA
+                         (NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE_NUMBER)
+OUTPUT INSERTED.CONTACT_DATA_ID
+VALUES        (@NAME,@ADDRESS1,@ADDRESS2,@CITY,@POSTAL_CODE,@EMAIL,@PHONE_NUMBER); 
+SELECT @@IDENTITY
+
+
+";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS1", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8169,7 +8192,7 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertWithSequence(string NAME, string ADDRESS1, string ADDRESS2, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER) {
+        public virtual object InsertWithSequence(string NAME, string ADDRESS1, string ADDRESS2, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
@@ -8218,16 +8241,22 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
                         != global::System.Data.ConnectionState.Open)) {
                 command.Connection.Open();
             }
-            int returnValue;
+            object returnValue;
             try {
-                returnValue = command.ExecuteNonQuery();
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     command.Connection.Close();
                 }
             }
-            return returnValue;
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
+            }
         }
     }
     
