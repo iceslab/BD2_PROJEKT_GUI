@@ -31,23 +31,20 @@ namespace Terminal
             MAINTANANCEVIEW,
             RESERVATIONSVIEW
         };
-        private TabViewType viewType;
         private static readonly String connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.Manager"].ConnectionString;
-        private SqlConnection connection;
         
 
         public ManagerWindow()
         {
             InitializeComponent();
             
-            connection = new SqlConnection(connectionString);
             ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
                 new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
         }
 
         private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)
         {
-            var table = adapter.GetData();
+            var table = adapter.GetJoinedData();
             DGTabView.ItemsSource = table.DefaultView;
         }
         private void FillDataGrid(ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)

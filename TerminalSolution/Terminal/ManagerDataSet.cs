@@ -6,6 +6,9 @@
 }
 
 namespace Terminal.ManagerDataSetTableAdapters {
+    partial class CLIENTSTableAdapter
+    {
+    }
     
     
     public partial class ACCOUNTSTableAdapter {

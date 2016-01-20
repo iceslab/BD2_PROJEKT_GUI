@@ -82,7 +82,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AgentDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="EmployeeDataSet.cs">
       <DependentUpon>EmployeeDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
