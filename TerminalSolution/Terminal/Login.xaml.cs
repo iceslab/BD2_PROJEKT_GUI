@@ -48,7 +48,7 @@ namespace Terminal
                         window.Show();
                         break;
                     case 3:
-                        window = new AgentWindow();
+                        window = new AgentWindow(login);
                         window.Show();
                         break;
                 }

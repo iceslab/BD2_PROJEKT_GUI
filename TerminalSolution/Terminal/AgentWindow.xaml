@@ -27,7 +27,38 @@
             <Button Content="Kontakt" Margin="0,0,0,5"/>
             <Button Content="Zgłość problem" Margin="0,0,0,5"/>
         </StackPanel>
-        <Button Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" />
+        <Button Name="logoutButton" Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" Click="logoutButton_Click" />
         <Image Source="Graphics/airport-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2"/>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Imię i nazwisko" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,5,0" Grid.Row="1"/>
+            <Label Content="Ulica" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="2"/>
+            <Label Content="Miasto" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="3"/>
+            <Label Content="Kod pocztowy" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="4"/>
+            <Label Content="Nr telefonu" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="5"/>
+            <Label Content="E-mail" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,15" Grid.Row="6"/>
+            <TextBox Name="TBAgentName" HorizontalAlignment="Left" Height="23" Margin="5,15,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="1"/>
+            <TextBox Name="TBAgentStreet" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="2"/>
+            <TextBox Name="TBAgentCity" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="3"/>
+            <TextBox Name="TBAgentPostCode" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="4"/>
+            <TextBox Name="TBAgentPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="5"/>
+            <TextBox Name="TBAgentEmail" HorizontalAlignment="Left" Height="23" Margin="5,0,0,15" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="6"/>
+        </Grid>
     </Grid>
 </Window>

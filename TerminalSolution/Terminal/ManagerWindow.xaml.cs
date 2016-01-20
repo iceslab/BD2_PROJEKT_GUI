@@ -37,9 +37,7 @@ namespace Terminal
         public ManagerWindow()
         {
             InitializeComponent();
-            
-            ManagerDataSetTableAdapters.ACCOUNTSTableAdapter x =
-                new ManagerDataSetTableAdapters.ACCOUNTSTableAdapter();
+            changeTab(TabViewType.CLIENTSVIEW);
         }
 
         private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)

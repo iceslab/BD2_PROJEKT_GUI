@@ -7828,7 +7828,7 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE" +
@@ -7836,17 +7836,27 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "INSERT INTO CONTACT_DATA\r\n                         (NAME, ADDRESS1, ADDRESS2, CIT" +
+            this._commandCollection[1].CommandText = @"SELECT        ACCOUNTS.ACCOUNT_ID, AGENTS.AGENT_ID, CONTACT_DATA.CONTACT_DATA_ID, CONTACT_DATA.NAME, CONTACT_DATA.ADDRESS1, 
+                         CONTACT_DATA.ADDRESS2, CONTACT_DATA.CITY, CONTACT_DATA.POSTAL_CODE, CONTACT_DATA.EMAIL, CONTACT_DATA.PHONE_NUMBER
+FROM            dbo.ACCOUNTS INNER JOIN
+                         dbo.AGENTS ON ACCOUNTS.AGENT_ID = AGENTS.AGENT_ID INNER JOIN
+                         dbo.CONTACT_DATA ON AGENTS.CONTACT_DATA_ID = CONTACT_DATA.CONTACT_DATA_ID
+WHERE        (ACCOUNTS.LOGIN = @LOGIN)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LOGIN", global::System.Data.SqlDbType.VarChar, 16, global::System.Data.ParameterDirection.Input, 0, 0, "LOGIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO CONTACT_DATA\r\n                         (NAME, ADDRESS1, ADDRESS2, CIT" +
                 "Y, POSTAL_CODE, EMAIL, PHONE_NUMBER)\r\nVALUES        (@NAME,@ADDRESS1,@ADDRESS2,@" +
                 "CITY,@POSTAL_CODE,@EMAIL,@PHONE_NUMBER); \r\n";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS1", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS2", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CITY", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "CITY", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@POSTAL_CODE", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "POSTAL_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMAIL", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "EMAIL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PHONE_NUMBER", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PHONE_NUMBER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS1", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS2", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CITY", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "CITY", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@POSTAL_CODE", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "POSTAL_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMAIL", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "EMAIL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PHONE_NUMBER", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PHONE_NUMBER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7868,6 +7878,42 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual AgentDataSet.CONTACT_DATADataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            AgentDataSet.CONTACT_DATADataTable dataTable = new AgentDataSet.CONTACT_DATADataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByLogin(AgentDataSet.CONTACT_DATADataTable dataTable, string LOGIN) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((LOGIN == null)) {
+                throw new global::System.ArgumentNullException("LOGIN");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(LOGIN));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual AgentDataSet.CONTACT_DATADataTable GetDataByLogin(string LOGIN) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((LOGIN == null)) {
+                throw new global::System.ArgumentNullException("LOGIN");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(LOGIN));
+            }
             AgentDataSet.CONTACT_DATADataTable dataTable = new AgentDataSet.CONTACT_DATADataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -8170,7 +8216,7 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertWithSequence(string NAME, string ADDRESS1, string ADDRESS2, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
