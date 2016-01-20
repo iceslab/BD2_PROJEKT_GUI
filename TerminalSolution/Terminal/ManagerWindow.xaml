@@ -15,23 +15,23 @@
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" Width="127">
             <Label Content="Przegląd" HorizontalAlignment="Center"/>
             <Button x:Name="clientsButton" Content="Klienci" Margin="0,0,0,5" Click="clientsButton_Click"/>
-            <Button x:Name="aircraftsButton" Content="Samoloty" Margin="0,0,0,5"/>
-            <Button x:Name="infrastructureButton" Content="Infrastruktura" Margin="0,0,0,5"/>
-            <Button x:Name="maintenanceButton" Content="Wyłączenia" Margin="0,0,0,5"/>
-            <Button x:Name="reservationsButton" Content="Rezerwacje" Margin="0,0,0,5"/>
+            <Button x:Name="aircraftsButton" Content="Samoloty" Margin="0,0,0,5" Click="Button_Click"/>
+            <Button x:Name="infrastructureButton" Content="Infrastruktura" Margin="0,0,0,5" Click="Button_Click_1"/>
+            <Button x:Name="maintenanceButton" Content="Wyłączenia" Margin="0,0,0,5" Click="Button_Click_2"/>
+            <Button x:Name="reservationsButton" Content="Rezerwacje" Margin="0,0,0,5" Click="Button_Click_3"/>
             <Label Content="Inne" HorizontalAlignment="Center"/>
             <Button x:Name="reportButton" Content="Zgłość problem" Margin="0,0,0,5"/>
         </StackPanel>
         <Button Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" />
         <Image Source="Graphics/airport-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2"/>
         <TabControl x:Name="tabControl" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Margin="0,0,10,10">
-            <TabItem Header="Dane klientów" Height="22" VerticalAlignment="Top">
+            <TabItem Name ="TIData" Header="Dane klientów" Height="22" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid AutoGenerateColumns="True" Name="clientsDataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="507" Height="324"/>
+                    <DataGrid AutoGenerateColumns="True" Name="DGTabView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="507" Height="324"/>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Statystyki">
+            <TabItem Name ="TIStats" Header="Statystyki">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid AutoGenerateColumns="True" Name="otherDataGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="507" Height="324"/>
                 </Grid>
