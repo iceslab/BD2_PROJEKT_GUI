@@ -23,7 +23,7 @@ namespace Terminal
     /// </summary>
     public partial class ManagerWindow : Window
     {
-        private enum TabViewType
+        private enum ManagerTabViewType
         {
             CLIENTSVIEW,
             AIRCRAFSTVIEW,
@@ -31,13 +31,11 @@ namespace Terminal
             MAINTANANCEVIEW,
             RESERVATIONSVIEW
         };
-        private static readonly String connectionString = ConfigurationManager.ConnectionStrings["Terminal.Properties.Settings.Manager"].ConnectionString;
-        
 
         public ManagerWindow()
         {
             InitializeComponent();
-            changeTab(TabViewType.CLIENTSVIEW);
+            changeTab(ManagerTabViewType.CLIENTSVIEW);
         }
 
         private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)
@@ -66,27 +64,27 @@ namespace Terminal
             DGTabView.ItemsSource = table.DefaultView;
         }
 
-        private void changeTab(TabViewType type)
+        private void changeTab(ManagerTabViewType type)
         {
             switch(type)
             {
-                case TabViewType.CLIENTSVIEW:
+                case ManagerTabViewType.CLIENTSVIEW:
                     TIData.Header = "Dane klientów";
                     FillDataGrid(new ManagerDataSetTableAdapters.CLIENTSTableAdapter());
                     break;
-                case TabViewType.AIRCRAFSTVIEW:
+                case ManagerTabViewType.AIRCRAFSTVIEW:
                     TIData.Header = "Samoloty przegląd";
                     FillDataGrid(new ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter());
                     break;
-                case TabViewType.INFRASTRUCTUREVIEW:
+                case ManagerTabViewType.INFRASTRUCTUREVIEW:
                     TIData.Header = "Infrastruktura przegląd";
                     FillDataGrid(new ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter());
                     break;
-                case TabViewType.MAINTANANCEVIEW:
+                case ManagerTabViewType.MAINTANANCEVIEW:
                     TIData.Header = "Planowane remonty";
                     FillDataGrid(new ManagerDataSetTableAdapters.MAINTENANCETableAdapter());
                     break;
-                case TabViewType.RESERVATIONSVIEW:
+                case ManagerTabViewType.RESERVATIONSVIEW:
                     TIData.Header = "Aktualne rezerwacje";
                     FillDataGrid(new ManagerDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
@@ -96,27 +94,27 @@ namespace Terminal
 
         private void clientsButton_Click(object sender, RoutedEventArgs e)
         {
-            changeTab(TabViewType.CLIENTSVIEW);
+            changeTab(ManagerTabViewType.CLIENTSVIEW);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            changeTab(TabViewType.AIRCRAFSTVIEW);
+            changeTab(ManagerTabViewType.AIRCRAFSTVIEW);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            changeTab(TabViewType.INFRASTRUCTUREVIEW);
+            changeTab(ManagerTabViewType.INFRASTRUCTUREVIEW);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            changeTab(TabViewType.MAINTANANCEVIEW);
+            changeTab(ManagerTabViewType.MAINTANANCEVIEW);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            changeTab(TabViewType.RESERVATIONSVIEW);
+            changeTab(ManagerTabViewType.RESERVATIONSVIEW);
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)

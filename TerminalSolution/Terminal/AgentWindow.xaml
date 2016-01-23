@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Cieśla-Kardas Airport" Height="487.333" Width="698" Background="#FF99D9EA">
-    <Grid>
+    <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="320*"/>
@@ -12,53 +12,22 @@
             <ColumnDefinition Width="314*"/>
             <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" Width="127">
+        <StackPanel x:Name="SPmain" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,0,0,0" Width="127">
             <Label Content="Twoje dane" HorizontalAlignment="Center"/>
-            <Button Content="Przegląd" Margin="0,0,0,5"/>
-            <Button Content="Edycja" Margin="0,0,0,5"/>
+            <Button x:Name="accountViewButton" Content="Przegląd" Margin="0,0,0,5" Click="accountViewButton_Click"/>
+            <Button x:Name="accountEditButton" Content="Edycja" Margin="0,0,0,5" Click="accountEditButton_Click"/>
             <Label Content="Samoloty" HorizontalAlignment="Center" />
-            <Button Content="Przegląd" Margin="0,0,0,5"/>
-            <Button Content="Edycja" Margin="0,0,0,5"/>
+            <Button x:Name="aircraftsViewButton" Content="Przegląd" Margin="0,0,0,5" Click="aircraftsViewButton_Click"/>
+            <Button x:Name="aircraftsEditButton" Content="Edycja" Margin="0,0,0,5" Click="aircraftsEditButton_Click"/>
             <Label Content="Rezerwacje" HorizontalAlignment="Center"/>
-            <Button Content="Dodaj" Margin="0,0,0,5"/>
-            <Button Content="Przegląd" Margin="0,0,0,5"/>
-            <Button Content="Usuń" Margin="0,0,0,5"/>
+            <Button x:Name="reservationsAddButton" Content="Dodaj" Margin="0,0,0,5" Click="reservationsAddButton_Click"/>
+            <Button x:Name="reservationsViewButton" Content="Przegląd" Margin="0,0,0,5" Click="reservationsViewButton_Click"/>
+            <Button x:Name="reservationsDeleteButton" Content="Usuń" Margin="0,0,0,5" Click="reservationsDeleteButton_Click"/>
             <Label Content="Inne" HorizontalAlignment="Center"/>
-            <Button Content="Kontakt" Margin="0,0,0,5"/>
-            <Button Content="Zgłość problem" Margin="0,0,0,5"/>
+            <Button x:Name="contactButton" Content="Kontakt" Margin="0,0,0,5" Click="contactButton_Click"/>
+            <Button x:Name="reportButton" Content="Zgłość problem" Margin="0,0,0,5"/>
         </StackPanel>
         <Button Name="logoutButton" Grid.Column="2" Grid.Row="0" Content="Wyloguj" HorizontalAlignment="Right" Height="25" Margin="0,10,10,0" VerticalAlignment="Top" Width="100" Click="logoutButton_Click" />
         <Image Source="Graphics/airport-logo.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2"/>
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Imię i nazwisko" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,5,0" Grid.Row="1"/>
-            <Label Content="Ulica" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="2"/>
-            <Label Content="Miasto" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="3"/>
-            <Label Content="Kod pocztowy" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="4"/>
-            <Label Content="Nr telefonu" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Grid.Row="5"/>
-            <Label Content="E-mail" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,15" Grid.Row="6"/>
-            <TextBox Name="TBAgentName" HorizontalAlignment="Left" Height="23" Margin="5,15,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="1"/>
-            <TextBox Name="TBAgentStreet" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="2"/>
-            <TextBox Name="TBAgentCity" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="3"/>
-            <TextBox Name="TBAgentPostCode" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="4"/>
-            <TextBox Name="TBAgentPhoneNumber" HorizontalAlignment="Left" Height="23" Margin="5,5,0,0" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="5"/>
-            <TextBox Name="TBAgentEmail" HorizontalAlignment="Left" Height="23" Margin="5,0,0,15" TextWrapping="Wrap" Width="120"  Grid.Column="1" Grid.Row="6"/>
-        </Grid>
     </Grid>
 </Window>

@@ -20,17 +20,132 @@ namespace Terminal
     /// </summary>
     public partial class AgentWindow : Window
     {
-        private string login;
-
-        public AgentWindow()
+        private enum AgentTabViewType
         {
-            InitializeComponent();
-            login = "";
-            FillData();
+            ACCOUNTVIEW,
+            ACCOUNTEDIT,
+            AIRCRAFSTVIEW,
+            AIRCRAFSTEDIT,
+            RESERVATIONSADD,
+            RESERVATIONSVIEW,
+            RESERVATIONSREMOVE
+        };
+
+        private string login;
+        private string[] labelNames = { "Imię i nazwisko", "Ulica", "Miasto", "Kod pocztowy", "Nr telefonu", "E-mail" };
+        private Grid GAccount, GTabData, GTabStats;
+        private DataGrid DGData, DGStats;
+        private TabControl TCView;
+        private TabItem TIData, TIStats;
+        private TextBox[] textBoxes;
+        private Label[] labels;
+
+        private void InitializeControls()
+        {
+            InitializeAccountGrid();
+            InitializeTabControlView();
         }
+
+        private void InitializeAccountGrid()
+        {
+            GAccount = new Grid();
+            GAccount.SetValue(Grid.RowProperty, 1);
+            GAccount.SetValue(Grid.ColumnProperty, 1);
+            GAccount.SetValue(Grid.ColumnSpanProperty, 2);
+            ColumnDefinition col1 = new ColumnDefinition(), col2 = new ColumnDefinition();
+            col1.Width = GridLength.Auto;
+            col2.Width = GridLength.Auto;
+            GAccount.ColumnDefinitions.Add(col1);
+            GAccount.ColumnDefinitions.Add(col2);
+
+            labels = new Label[labelNames.Length];
+            textBoxes = new TextBox[labelNames.Length];
+
+            for (int i = 0; i < labelNames.Length; i++)
+            {
+                var row = new RowDefinition();
+                row.Height = GridLength.Auto;
+                GAccount.RowDefinitions.Add(row);
+
+                labels[i] = new Label();
+                labels[i].Content = labelNames[i];
+                labels[i].HorizontalAlignment = HorizontalAlignment.Right;
+                labels[i].VerticalAlignment = VerticalAlignment.Top;
+                labels[i].SetValue(Grid.RowProperty, i);
+                GAccount.Children.Add(labels[i]);
+
+                textBoxes[i] = new TextBox();
+                textBoxes[i].HorizontalAlignment = HorizontalAlignment.Left;
+                textBoxes[i].TextWrapping = TextWrapping.Wrap;
+                textBoxes[i].Height = 23.0;
+                textBoxes[i].Width = 120.0;
+                textBoxes[i].SetValue(Grid.ColumnProperty, 1);
+                textBoxes[i].SetValue(Grid.RowProperty, i);
+                GAccount.Children.Add(textBoxes[i]);
+            }
+        }
+
+        private void InitializeTabControlView()
+        {
+            TCView = new TabControl();
+            TCView.SetValue(Grid.ColumnSpanProperty, 2);
+            TCView.SetValue(Grid.ColumnProperty, 1);
+            TCView.SetValue(Grid.RowProperty, 1);
+
+            TIData = new TabItem();
+            TIData.Header = "Dane klientów";
+            TIData.Height = 22;
+            TIData.VerticalAlignment = VerticalAlignment.Top;
+
+            GTabData = new Grid();
+
+            DGData = new DataGrid();
+            DGData.AutoGenerateColumns = true;
+            DGData.HorizontalAlignment = HorizontalAlignment.Left;
+            DGData.VerticalAlignment = VerticalAlignment.Top;
+            DGData.Width = 507;
+            DGData.Height = 324;
+
+            GTabData.Children.Add(DGData);
+            TIData.Content = GTabData;
+
+            TIStats = new TabItem();
+            TIStats.Header = "Statystyki";
+            GTabStats = new Grid();
+
+            DGStats = new DataGrid();
+            DGStats.AutoGenerateColumns = true;
+            DGStats.HorizontalAlignment = HorizontalAlignment.Left;
+            DGStats.VerticalAlignment = VerticalAlignment.Top;
+            DGStats.Width = 507;
+            DGStats.Height = 324;
+
+            GTabStats.Children.Add(DGStats);
+            TIStats.Content = GTabStats;
+
+            TCView.Items.Add(TIData);
+            TCView.Items.Add(TIStats);
+        }
+
+        private void SetupAccountGrid()
+        {
+            if (mainGrid.Children.Contains(TCView))
+                mainGrid.Children.Remove(TCView);
+            mainGrid.Children.Add(GAccount);
+        }
+
+        private void SetupTabControlView()
+        {
+            if (mainGrid.Children.Contains(GAccount))
+                mainGrid.Children.Remove(GAccount);
+            mainGrid.Children.Add(TCView);
+        }
+
         public AgentWindow(string _login)
         {
             InitializeComponent();
+            InitializeControls();
+            SetupAccountGrid();
             login = _login;
             FillData();
         }
@@ -40,18 +155,117 @@ namespace Terminal
             AgentDataSetTableAdapters.CONTACT_DATATableAdapter accountsTA =
                 new AgentDataSetTableAdapters.CONTACT_DATATableAdapter();
             var row = accountsTA.GetDataByLogin(login)[0];
-            TBAgentName.Text = row.NAME;
-            TBAgentStreet.Text = row.ADDRESS1;
-            TBAgentCity.Text = row.CITY;
-            TBAgentPostCode.Text = row.POSTAL_CODE;
-            TBAgentPhoneNumber.Text = row.PHONE_NUMBER;
-            TBAgentEmail.Text = row.EMAIL;
+
+            textBoxes[0].Text = row.NAME;
+            textBoxes[1].Text = row.ADDRESS1;
+            textBoxes[2].Text = row.CITY;
+            textBoxes[3].Text = row.POSTAL_CODE;
+            textBoxes[4].Text = row.PHONE_NUMBER;
+            textBoxes[5].Text = row.EMAIL;
+        }
+
+        private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)
+        {
+            var table = adapter.GetJoinedData();
+            DGData.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGData.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGData.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.MAINTENANCETableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGData.ItemsSource = table.DefaultView;
+        }
+        private void FillDataGrid(ManagerDataSetTableAdapters.RESERVATIONSTableAdapter adapter)
+        {
+            var table = adapter.GetData();
+            DGData.ItemsSource = table.DefaultView;
+        }
+
+        private void changeTab(AgentTabViewType type)
+        {
+            switch (type)
+            {
+                case AgentTabViewType.ACCOUNTEDIT:
+                    TIData.Header = "Dane klientów";
+                    FillDataGrid(new ManagerDataSetTableAdapters.CLIENTSTableAdapter());
+                    break;
+                case AgentTabViewType.ACCOUNTVIEW:
+                    TIData.Header = "Samoloty przegląd";
+                    FillDataGrid(new ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter());
+                    break;
+                case AgentTabViewType.AIRCRAFSTEDIT:
+                    TIData.Header = "Infrastruktura przegląd";
+                    FillDataGrid(new ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter());
+                    break;
+                case AgentTabViewType.AIRCRAFSTVIEW:
+                    TIData.Header = "Planowane remonty";
+                    FillDataGrid(new ManagerDataSetTableAdapters.MAINTENANCETableAdapter());
+                    break;
+                case AgentTabViewType.RESERVATIONSADD:
+                    TIData.Header = "Aktualne rezerwacje";
+                    FillDataGrid(new ManagerDataSetTableAdapters.RESERVATIONSTableAdapter());
+                    break;
+                case AgentTabViewType.RESERVATIONSREMOVE:
+                    break;
+                case AgentTabViewType.RESERVATIONSVIEW:
+                    break;
+
+            }
         }
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             new Login().Show();
             Close();
+        }
+
+        private void accountViewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void accountEditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void aircraftsViewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void aircraftsEditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void reservationsAddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void reservationsViewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void reservationsDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void contactButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
