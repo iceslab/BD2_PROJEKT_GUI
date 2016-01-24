@@ -127,34 +127,41 @@ namespace Terminal
             TCView.Items.Add(TIStats);
         }
 
-        private void SetupAccountGrid()
+        private void SetupAccountGrid(bool enableControls)
         {
             if (mainGrid.Children.Contains(TCView))
                 mainGrid.Children.Remove(TCView);
-            mainGrid.Children.Add(GAccount);
+            if (!mainGrid.Children.Contains(GAccount))
+                mainGrid.Children.Add(GAccount);
+
+            foreach(var tb in textBoxes)
+            {
+                tb.IsEnabled = enableControls;
+            }
         }
 
-        private void SetupTabControlView()
+        private void SetupTabControlView(bool enableControls)
         {
             if (mainGrid.Children.Contains(GAccount))
                 mainGrid.Children.Remove(GAccount);
-            mainGrid.Children.Add(TCView);
+            if (!mainGrid.Children.Contains(TCView))
+                mainGrid.Children.Add(TCView);
+
+            DGData.IsEnabled = enableControls;
+            DGStats.IsEnabled = enableControls;
         }
 
         public AgentWindow(string _login)
         {
             InitializeComponent();
             InitializeControls();
-            SetupAccountGrid();
             login = _login;
-            FillData();
+            changeTab(AgentTabViewType.ACCOUNTVIEW);
         }
 
-        private void FillData()
+        private void FillData(AgentDataSetTableAdapters.CONTACT_DATATableAdapter adapter)
         {
-            AgentDataSetTableAdapters.CONTACT_DATATableAdapter accountsTA =
-                new AgentDataSetTableAdapters.CONTACT_DATATableAdapter();
-            var row = accountsTA.GetDataByLogin(login)[0];
+            var row = adapter.GetDataByLogin(login)[0];
 
             textBoxes[0].Text = row.NAME;
             textBoxes[1].Text = row.ADDRESS1;
@@ -164,27 +171,12 @@ namespace Terminal
             textBoxes[5].Text = row.EMAIL;
         }
 
-        private void FillDataGrid(ManagerDataSetTableAdapters.CLIENTSTableAdapter adapter)
-        {
-            var table = adapter.GetJoinedData();
-            DGData.ItemsSource = table.DefaultView;
-        }
-        private void FillDataGrid(ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)
+        private void FillDataGrid(AgentDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)
         {
             var table = adapter.GetData();
             DGData.ItemsSource = table.DefaultView;
         }
-        private void FillDataGrid(ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter adapter)
-        {
-            var table = adapter.GetData();
-            DGData.ItemsSource = table.DefaultView;
-        }
-        private void FillDataGrid(ManagerDataSetTableAdapters.MAINTENANCETableAdapter adapter)
-        {
-            var table = adapter.GetData();
-            DGData.ItemsSource = table.DefaultView;
-        }
-        private void FillDataGrid(ManagerDataSetTableAdapters.RESERVATIONSTableAdapter adapter)
+        private void FillDataGrid(AgentDataSetTableAdapters.RESERVATIONSTableAdapter adapter)
         {
             var table = adapter.GetData();
             DGData.ItemsSource = table.DefaultView;
@@ -192,31 +184,43 @@ namespace Terminal
 
         private void changeTab(AgentTabViewType type)
         {
+
             switch (type)
             {
                 case AgentTabViewType.ACCOUNTEDIT:
-                    TIData.Header = "Dane klientów";
-                    FillDataGrid(new ManagerDataSetTableAdapters.CLIENTSTableAdapter());
+                    SetupAccountGrid(true);
+                    TIData.Header = "Twoje dane edycja";
+                    FillData(new AgentDataSetTableAdapters.CONTACT_DATATableAdapter());
                     break;
                 case AgentTabViewType.ACCOUNTVIEW:
-                    TIData.Header = "Samoloty przegląd";
-                    FillDataGrid(new ManagerDataSetTableAdapters.AIRCRAFTSTableAdapter());
+                    SetupAccountGrid(false);
+                    TIData.Header = "Twoje dane przegląd";
+                    FillData(new AgentDataSetTableAdapters.CONTACT_DATATableAdapter());
                     break;
                 case AgentTabViewType.AIRCRAFSTEDIT:
-                    TIData.Header = "Infrastruktura przegląd";
-                    FillDataGrid(new ManagerDataSetTableAdapters.INFRASTRUCTURETableAdapter());
+                    SetupTabControlView(true);
+                    TIData.Header = "Samoloty edycja";
+                    FillDataGrid(new AgentDataSetTableAdapters.AIRCRAFTSTableAdapter());
                     break;
                 case AgentTabViewType.AIRCRAFSTVIEW:
-                    TIData.Header = "Planowane remonty";
-                    FillDataGrid(new ManagerDataSetTableAdapters.MAINTENANCETableAdapter());
+                    SetupTabControlView(false);
+                    TIData.Header = "Samoloty przegląd";
+                    FillDataGrid(new AgentDataSetTableAdapters.AIRCRAFTSTableAdapter());
                     break;
                 case AgentTabViewType.RESERVATIONSADD:
-                    TIData.Header = "Aktualne rezerwacje";
-                    FillDataGrid(new ManagerDataSetTableAdapters.RESERVATIONSTableAdapter());
+                    SetupTabControlView(true);
+                    TIData.Header = "Rezerwacje dodaj";
+                    FillDataGrid(new AgentDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
                 case AgentTabViewType.RESERVATIONSREMOVE:
+                    SetupTabControlView(true);
+                    TIData.Header = "Rezerwacje usuń";
+                    FillDataGrid(new AgentDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
                 case AgentTabViewType.RESERVATIONSVIEW:
+                    SetupTabControlView(false);
+                    TIData.Header = "Rezerwacje przegląd";
+                    FillDataGrid(new AgentDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
 
             }
@@ -230,42 +234,37 @@ namespace Terminal
 
         private void accountViewButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.ACCOUNTVIEW);
         }
 
         private void accountEditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.ACCOUNTEDIT);
         }
 
         private void aircraftsViewButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.AIRCRAFSTVIEW);
         }
 
         private void aircraftsEditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.AIRCRAFSTEDIT);
         }
 
         private void reservationsAddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.RESERVATIONSADD);
         }
 
         private void reservationsViewButton_Click(object sender, RoutedEventArgs e)
         {
-
+            changeTab(AgentTabViewType.RESERVATIONSVIEW);
         }
 
         private void reservationsDeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void contactButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            changeTab(AgentTabViewType.RESERVATIONSREMOVE);
         }
     }
 }
