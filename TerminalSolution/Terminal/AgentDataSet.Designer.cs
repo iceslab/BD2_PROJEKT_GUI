@@ -7828,7 +7828,7 @@ SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHON
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE" +
@@ -7857,6 +7857,22 @@ WHERE        (ACCOUNTS.LOGIN = @LOGIN)";
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@POSTAL_CODE", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "POSTAL_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMAIL", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "EMAIL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PHONE_NUMBER", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PHONE_NUMBER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = @"UPDATE       CONTACT_DATA
+SET                NAME = @NAME, ADDRESS1 = @ADDRESS1, CITY = @CITY, POSTAL_CODE = @POSTAL_CODE, EMAIL = @EMAIL, PHONE_NUMBER = @PHONE_NUMBER
+WHERE        (CONTACT_DATA_ID = @Original_CONTACT_DATA_ID) OR
+                         (CONTACT_DATA_ID = @Original_CONTACT_DATA_ID); 
+SELECT CONTACT_DATA_ID, NAME, ADDRESS1, ADDRESS2, CITY, POSTAL_CODE, EMAIL, PHONE_NUMBER FROM CONTACT_DATA WHERE (CONTACT_DATA_ID = @CONTACT_DATA_ID)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS1", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CITY", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "CITY", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@POSTAL_CODE", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "POSTAL_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMAIL", global::System.Data.SqlDbType.VarChar, 60, global::System.Data.ParameterDirection.Input, 0, 0, "EMAIL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PHONE_NUMBER", global::System.Data.SqlDbType.VarChar, 32, global::System.Data.ParameterDirection.Input, 0, 0, "PHONE_NUMBER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CONTACT_DATA_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CONTACT_DATA_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8259,6 +8275,67 @@ WHERE        (ACCOUNTS.LOGIN = @LOGIN)";
             else {
                 command.Parameters[6].Value = ((string)(PHONE_NUMBER));
             }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string NAME, string ADDRESS1, string CITY, string POSTAL_CODE, string EMAIL, string PHONE_NUMBER, int Original_CONTACT_DATA_ID, int CONTACT_DATA_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((NAME == null)) {
+                throw new global::System.ArgumentNullException("NAME");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(NAME));
+            }
+            if ((ADDRESS1 == null)) {
+                throw new global::System.ArgumentNullException("ADDRESS1");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ADDRESS1));
+            }
+            if ((CITY == null)) {
+                throw new global::System.ArgumentNullException("CITY");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(CITY));
+            }
+            if ((POSTAL_CODE == null)) {
+                throw new global::System.ArgumentNullException("POSTAL_CODE");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(POSTAL_CODE));
+            }
+            if ((EMAIL == null)) {
+                throw new global::System.ArgumentNullException("EMAIL");
+            }
+            else {
+                command.Parameters[4].Value = ((string)(EMAIL));
+            }
+            if ((PHONE_NUMBER == null)) {
+                throw new global::System.ArgumentNullException("PHONE_NUMBER");
+            }
+            else {
+                command.Parameters[5].Value = ((string)(PHONE_NUMBER));
+            }
+            command.Parameters[6].Value = ((int)(Original_CONTACT_DATA_ID));
+            command.Parameters[7].Value = ((int)(CONTACT_DATA_ID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

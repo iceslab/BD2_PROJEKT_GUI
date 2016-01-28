@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,11 +40,53 @@ namespace Terminal
         private TabItem TIData, TIStats;
         private TextBox[] textBoxes;
         private Label[] labels;
+        private Button applyChangesButton;
+        private AgentTabViewType currentView;
+        private int contactDataId = -1;
 
         private void InitializeControls()
         {
+            InitializeApplyButton();
             InitializeAccountGrid();
             InitializeTabControlView();
+        }
+
+        private void applyChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (currentView)
+            {
+                case AgentTabViewType.ACCOUNTEDIT:
+                    AgentDataSetTableAdapters.CONTACT_DATATableAdapter adapter =
+                        new AgentDataSetTableAdapters.CONTACT_DATATableAdapter();
+                    adapter.UpdateQuery(
+                        textBoxes[0].Text,
+                        textBoxes[1].Text,
+                        textBoxes[2].Text,
+                        textBoxes[3].Text,
+                        textBoxes[5].Text,
+                        textBoxes[4].Text,
+                        contactDataId,
+                        contactDataId);
+                    break;
+                case AgentTabViewType.AIRCRAFSTEDIT:
+                    break;
+                case AgentTabViewType.RESERVATIONSADD:
+                    break;
+                case AgentTabViewType.RESERVATIONSREMOVE:
+                    break;
+            }
+        }
+
+        private void InitializeApplyButton()
+        {
+            applyChangesButton = new Button();
+            applyChangesButton.Click += applyChangesButton_Click;
+            applyChangesButton.SetValue(Grid.ColumnProperty, 2);
+            applyChangesButton.SetValue(Grid.RowProperty, 2);
+            applyChangesButton.Height = 23.0;
+            applyChangesButton.Width = 90.0;
+            applyChangesButton.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            applyChangesButton.VerticalAlignment = System.Windows.VerticalAlignment.Top;
         }
 
         private void InitializeAccountGrid()
@@ -127,25 +170,45 @@ namespace Terminal
             TCView.Items.Add(TIStats);
         }
 
-        private void SetupAccountGrid(bool enableControls)
+        private void SetupApplyChanges(bool addApplyButton, string buttonText)
+        {
+            if (addApplyButton)
+            {
+                if (!mainGrid.Children.Contains(applyChangesButton))
+                    mainGrid.Children.Add(applyChangesButton);
+            }
+            else
+            {
+                if (mainGrid.Children.Contains(applyChangesButton))
+                    mainGrid.Children.Remove(applyChangesButton);
+            }
+
+            applyChangesButton.Content = buttonText;
+        }
+
+        private void SetupAccountGrid(bool enableControls, bool addApplyButton = false, string buttonText = "")
         {
             if (mainGrid.Children.Contains(TCView))
                 mainGrid.Children.Remove(TCView);
             if (!mainGrid.Children.Contains(GAccount))
                 mainGrid.Children.Add(GAccount);
 
-            foreach(var tb in textBoxes)
+            SetupApplyChanges(addApplyButton, buttonText);
+
+            foreach (var tb in textBoxes)
             {
                 tb.IsEnabled = enableControls;
             }
         }
 
-        private void SetupTabControlView(bool enableControls)
+        private void SetupTabControlView(bool enableControls, bool addApplyButton = false, string buttonText = "")
         {
             if (mainGrid.Children.Contains(GAccount))
                 mainGrid.Children.Remove(GAccount);
             if (!mainGrid.Children.Contains(TCView))
                 mainGrid.Children.Add(TCView);
+
+            SetupApplyChanges(addApplyButton, buttonText);
 
             DGData.IsEnabled = enableControls;
             DGStats.IsEnabled = enableControls;
@@ -162,7 +225,7 @@ namespace Terminal
         private void FillData(AgentDataSetTableAdapters.CONTACT_DATATableAdapter adapter)
         {
             var row = adapter.GetDataByLogin(login)[0];
-
+            contactDataId = row.CONTACT_DATA_ID;
             textBoxes[0].Text = row.NAME;
             textBoxes[1].Text = row.ADDRESS1;
             textBoxes[2].Text = row.CITY;
@@ -170,7 +233,6 @@ namespace Terminal
             textBoxes[4].Text = row.PHONE_NUMBER;
             textBoxes[5].Text = row.EMAIL;
         }
-
         private void FillDataGrid(AgentDataSetTableAdapters.AIRCRAFTSTableAdapter adapter)
         {
             var table = adapter.GetData();
@@ -184,11 +246,11 @@ namespace Terminal
 
         private void changeTab(AgentTabViewType type)
         {
-
+            currentView = type;
             switch (type)
             {
                 case AgentTabViewType.ACCOUNTEDIT:
-                    SetupAccountGrid(true);
+                    SetupAccountGrid(true, true, "Uaktualnij");
                     TIData.Header = "Twoje dane edycja";
                     FillData(new AgentDataSetTableAdapters.CONTACT_DATATableAdapter());
                     break;
@@ -198,7 +260,7 @@ namespace Terminal
                     FillData(new AgentDataSetTableAdapters.CONTACT_DATATableAdapter());
                     break;
                 case AgentTabViewType.AIRCRAFSTEDIT:
-                    SetupTabControlView(true);
+                    SetupTabControlView(true, true, "Uaktualnij");
                     TIData.Header = "Samoloty edycja";
                     FillDataGrid(new AgentDataSetTableAdapters.AIRCRAFTSTableAdapter());
                     break;
@@ -208,12 +270,12 @@ namespace Terminal
                     FillDataGrid(new AgentDataSetTableAdapters.AIRCRAFTSTableAdapter());
                     break;
                 case AgentTabViewType.RESERVATIONSADD:
-                    SetupTabControlView(true);
+                    SetupTabControlView(true, true, "Dodaj");
                     TIData.Header = "Rezerwacje dodaj";
                     FillDataGrid(new AgentDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
                 case AgentTabViewType.RESERVATIONSREMOVE:
-                    SetupTabControlView(true);
+                    SetupTabControlView(true, true, "Usuń");
                     TIData.Header = "Rezerwacje usuń";
                     FillDataGrid(new AgentDataSetTableAdapters.RESERVATIONSTableAdapter());
                     break;
