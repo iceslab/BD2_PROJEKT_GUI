@@ -53,12 +53,21 @@ namespace Terminal
 
         private void applyChangesButton_Click(object sender, RoutedEventArgs e)
         {
+            AgentDataSetTableAdapters.CONTACT_DATATableAdapter contactDataTA =
+                       new AgentDataSetTableAdapters.CONTACT_DATATableAdapter();
+            AgentDataSetTableAdapters.AIRCRAFTSTableAdapter aircraftsTA =
+                        new AgentDataSetTableAdapters.AIRCRAFTSTableAdapter();
+            AgentDataSet.AIRCRAFTSDataTable aircraftsDT =
+                new AgentDataSet.AIRCRAFTSDataTable();
+            AgentDataSetTableAdapters.RESERVATIONSTableAdapter reservationsTA =
+                        new AgentDataSetTableAdapters.RESERVATIONSTableAdapter();
+            AgentDataSet.RESERVATIONSDataTable reservationsDT =
+                new AgentDataSet.RESERVATIONSDataTable();
             switch (currentView)
             {
                 case AgentTabViewType.ACCOUNTEDIT:
-                    AgentDataSetTableAdapters.CONTACT_DATATableAdapter adapter =
-                        new AgentDataSetTableAdapters.CONTACT_DATATableAdapter();
-                    adapter.UpdateQuery(
+                   
+                    contactDataTA.UpdateQuery(
                         textBoxes[0].Text,
                         textBoxes[1].Text,
                         textBoxes[2].Text,
@@ -69,12 +78,29 @@ namespace Terminal
                         contactDataId);
                     break;
                 case AgentTabViewType.AIRCRAFSTEDIT:
+                    DataView airDV = (DataView)DGData.ItemsSource;
+
+                    foreach (DataRowView drv in airDV)
+                        aircraftsDT.ImportRow(drv.Row);
+                    aircraftsTA.Update(aircraftsDT);
                     break;
                 case AgentTabViewType.RESERVATIONSADD:
+                    DataView resDV = (DataView)DGData.ItemsSource;
+                    foreach (DataRowView drv in resDV)
+                        reservationsDT.ImportRow(drv.Row);
+                    reservationsTA.Update(reservationsDT);
                     break;
                 case AgentTabViewType.RESERVATIONSREMOVE:
+                    var selectedRows = DGData.SelectedItems;
+
+                    foreach (DataRowView z in selectedRows)
+                    {
+                        var row = (AgentDataSet.RESERVATIONSRow)z.Row;
+                        reservationsTA.DeleteQuery(row.RESERVATIONS_ID);
+                    }
                     break;
             }
+            changeTab(currentView);
         }
 
         private void InitializeApplyButton()
